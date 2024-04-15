@@ -1,19 +1,18 @@
---THIS TABLE NEEDS TO BE FINISHED
-
-IF OBJECT_ID(N'MLS.ClubPlayers') IS NULL
+IF OBJECT_ID(N'MLS.MatchClubPlayers') IS NULL
 BEGIN  
-    CREATE TABLE MLS.ClubPlayers
+    CREATE TABLE MLS.MatchClubPlayers
     (
-        ClubPlayerID INT NOT NULL IDENTITY(1, 1),
-        PlayerID INT NOT NULL,
+        MatchClubPlayerID INT NOT NULL IDENTITY(1, 1),
+        ClubPlayerID INT NOT NULL,
         PlayerTypeID INT NOT NULL,
+        MatchID INT NOT NULL,
         ClubID INT NOT NULL,
-        DateStarted DATE NOT NULL,
-        DateEnded DATE
+        SubstitutedForPlayer INT,
+        SubstitutionTime INT
 
-        CONSTRAINT [PK_MLS_ClubPlayers_ClubPlayerID] PRIMARY KEY CLUSTERED
+        CONSTRAINT [PK_MLS_MatchClubPlayers_MatchClubPlayerID] PRIMARY KEY CLUSTERED
         (
-            ClubPlayerID ASC
+            MatchClubPlayerID ASC
         )
     )
 END;
@@ -22,21 +21,23 @@ IF NOT EXISTS
     (
         SELECT * 
         FROM sys.foreign_keys fk
-        WHERE fk.parent_object_id = OBJECT_ID(N'MLS.ClubPlayers')
-            AND fk.referenced_object_id = OBJECT_ID(N'MLS.Players')
-            AND fk.[name] = N'FK_MLS_ClubPlayers_MLS_Players'
+        WHERE fk.parent_object_id = OBJECT_ID(N'MLS.MatchClubPlayers')
+            AND fk.referenced_object_id = OBJECT_ID(N'MLS.ClubPlayers')
+            AND fk.[name] = N'FK_MLS_MatchClubPlayers_MLS_ClubPlayers'
     )
 BEGIN 
-    ALTER TABLE MLS.ClubPlayers
-    ADD CONSTRAINT [FK_MLS_ClubPlayers_MLS_Players] FOREIGN KEY
+    ALTER TABLE MLS.MatchClubPlayers
+    ADD CONSTRAINT [FK_MLS_MatchClubPlayers_MLS_ClubPlayers] FOREIGN KEY
     (
-        PlayerID,
-        PlayerTypeID
+        ClubPlayerID,
+        PlayerTypeID,
+        ClubID
     )
-    REFERENCES MLS.Players
+    REFERENCES MLS.ClubPlayers
     (
-        PlayerID,
-        PlayerTypeID
+        ClubPlayerID,
+        PlayerTypeID,
+        ClubID
     )
 END;
 
@@ -44,18 +45,40 @@ IF NOT EXISTS
     (
         SELECT * 
         FROM sys.foreign_keys fk
-        WHERE fk.parent_object_id = OBJECT_ID(N'MLS.ClubPlayers')
-            AND fk.referenced_object_id = OBJECT_ID(N'MLS.Clubs')
-            AND fk.[name] = N'FK_MLS_ClubPlayers_MLS_Clubs'
+        WHERE fk.parent_object_id = OBJECT_ID(N'MLS.MatchClubPlayers')
+            AND fk.referenced_object_id = OBJECT_ID(N'MLS.MatchClubs')
+            AND fk.[name] = N'FK_MLS_MatchClubPlayers_MLS_MatchClubs'
     )
 BEGIN 
-    ALTER TABLE MLS.ClubPlayers
-    ADD CONSTRAINT [FK_MLS_ClubPlayers_MLS_Clubs] FOREIGN KEY
+    ALTER TABLE MLS.MatchClubPlayers
+    ADD CONSTRAINT [FK_MLS_MatchClubPlayers_MLS_MatchClubs] FOREIGN KEY
     (
+        MatchID,
         ClubID
     )
-    REFERENCES MLS.Players
+    REFERENCES MLS.MatchClubs
     (
+        MatchID,
         ClubID
+    )
+END;
+
+IF NOT EXISTS   
+    (
+        SELECT * 
+        FROM sys.foreign_keys fk
+        WHERE fk.parent_object_id = OBJECT_ID(N'MLS.MatchClubPlayers')
+            AND fk.referenced_object_id = OBJECT_ID(N'MLS.MatchClubPlayers')
+            AND fk.[name] = N'FK_MLS_MatchClubPlayers_MLS_MatchClubPlayers'
+    )
+BEGIN 
+    ALTER TABLE MLS.MatchClubPlayers
+    ADD CONSTRAINT [FK_MLS_MatchClubPlayers_MLS_MatchClubPlayers] FOREIGN KEY
+    (
+        SubstitutedForPlayer
+    )
+    REFERENCES MLS.MatchClubPlayers
+    (
+        MatchClubPlayerID
     )
 END;

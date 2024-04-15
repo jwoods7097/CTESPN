@@ -2,7 +2,7 @@ IF OBJECT_ID(N'MLS.PlayerTypes') IS NULL
 BEGIN
 	CREATE TABLE MLS.PlayerTypes
     (
-	    PlayerTypeID INT NOT NULL IDENTITY(1, 1),
+	    PlayerTypeID INT NOT NULL,
 		[Name] NVARCHAR(32) NOT NULL
 
 		CONSTRAINT [PK_MLS_PlayerTypes_PlayerTypeID] PRIMARY KEY CLUSTERED

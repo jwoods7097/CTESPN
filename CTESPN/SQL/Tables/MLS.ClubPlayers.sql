@@ -52,8 +52,25 @@ BEGIN
     (
         ClubID
     )
-    REFERENCES MLS.Players
+    REFERENCES MLS.Clubs
     (
+        ClubID
+    )
+END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.key_constraints kc
+        WHERE kc.parent_object_id = OBJECT_ID(N'MLS.ClubPlayers')
+            AND kc.[name] = N'UK_MLS_ClubPlayers_ClubPlayerIDPlayerTypeIDClubID'
+    )
+BEGIN
+    ALTER TABLE MLS.ClubPlayers
+    ADD CONSTRAINT [UK_MLS_ClubPlayers_ClubPlayerIDPlayerTypeIDClubID] UNIQUE NONCLUSTERED
+    (
+        ClubPlayerID,
+        PlayerTypeID,
         ClubID
     )
 END;

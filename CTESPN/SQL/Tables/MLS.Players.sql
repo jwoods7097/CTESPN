@@ -22,7 +22,7 @@ IF NOT EXISTS
     )
 BEGIN
     ALTER TABLE MLS.Players
-    ADD CONSTRAINT [UK_MLS_PlayerIDPlayerTypeID] UNIQUE NONCLUSTERED
+    ADD CONSTRAINT [UK_MLS_Players_PlayerIDPlayerTypeID] UNIQUE NONCLUSTERED
     (
         PlayerID,
         PlayerTypeID
