@@ -1,6 +1,6 @@
-IF OBJECT_ID(N'MLS.Clubs') IS NULL
+IF OBJECT_ID(N'MLS.Club') IS NULL
 BEGIN  
-    CREATE TABLE MLS.Clubs
+    CREATE TABLE MLS.Club
     (
         ClubID INT NOT NULL IDENTITY(1, 1),
         [Name] NVARCHAR(64) NOT NULL,
@@ -19,11 +19,11 @@ IF NOT EXISTS
     (
         SELECT *
         FROM sys.key_constraints kc
-        WHERE kc.parent_object_id = OBJECT_ID(N'MLS.Clubs')
+        WHERE kc.parent_object_id = OBJECT_ID(N'MLS.Club')
             AND kc.[name] = N'UK_MLS_Clubs_Name'
     )
 BEGIN
-    ALTER TABLE MLS.Clubs
+    ALTER TABLE MLS.Club
     ADD CONSTRAINT [UK_MLS_Clubs_Name] UNIQUE NONCLUSTERED
     (
         [Name]
@@ -34,11 +34,11 @@ IF NOT EXISTS
     (
         SELECT *
         FROM sys.key_constraints kc
-        WHERE kc.parent_object_id = OBJECT_ID(N'MLS.Clubs')
+        WHERE kc.parent_object_id = OBJECT_ID(N'MLS.Club')
             AND kc.[name] = N'UK_MLS_Clubs_Abbreviation'
     )
 BEGIN
-    ALTER TABLE MLS.Clubs
+    ALTER TABLE MLS.Club
     ADD CONSTRAINT [UK_MLS_Clubs_Abbreviation] UNIQUE NONCLUSTERED
     (
         Abbreviation

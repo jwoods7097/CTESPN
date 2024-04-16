@@ -1,9 +1,9 @@
-DECLARE @PlayerTypesStaging TABLE (
+DECLARE @PlayerTypeStaging TABLE (
     PlayerTypeID INT NOT NULL PRIMARY KEY,
     [Name] NVARCHAR(32) NOT NULL
 )
 
-INSERT @PlayerTypesStaging(PlayerTypeID, [Name])
+INSERT @PlayerTypeStaging(PlayerTypeID, [Name])
 VALUES
     (1, 'Forward'),
     (2, 'Midfielder'),
@@ -11,7 +11,7 @@ VALUES
     (4, 'Goalkeeper');
 
 MERGE MLS.PlayerTypes T
-USING @PlayerTypesStaging S ON S.PlayerTypeID = T.PlayerTypeID
+USING @PlayerTypeStaging S ON S.PlayerTypeID = T.PlayerTypeID
 WHEN MATCHED AND S.[Name] <> T.[Name] THEN
     UPDATE
     SET [Name] = S.[Name]

@@ -20,16 +20,16 @@ IF NOT EXISTS
         SELECT * 
         FROM sys.foreign_keys fk
         WHERE fk.parent_object_id = OBJECT_ID(N'MLS.MatchGoalkeeperStats')
-            AND fk.referenced_object_id = OBJECT_ID(N'MLS.MatchClubPlayers')
-            AND fk.[name] = N'FK_MLS_MatchGoalkeeperStats_MLS_MatchClubPlayers'
+            AND fk.referenced_object_id = OBJECT_ID(N'MLS.MatchClubPlayer')
+            AND fk.[name] = N'FK_MLS_MatchGoalkeeperStats_MLS_MatchClubPlayer'
     )
 BEGIN 
     ALTER TABLE MLS.MatchGoalkeeperStats
-    ADD CONSTRAINT [FK_MLS_MatchGoalkeeperStats_MLS_MatchClubPlayers] FOREIGN KEY
+    ADD CONSTRAINT [FK_MLS_MatchGoalkeeperStats_MLS_MatchClubPlayer] FOREIGN KEY
     (
         MatchClubPlayerID
     )
-    REFERENCES MLS.MatchClubPlayers
+    REFERENCES MLS.MatchClubPlayer
     (
         MatchClubPlayerID
     )
