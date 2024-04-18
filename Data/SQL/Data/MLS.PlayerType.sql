@@ -10,7 +10,7 @@ VALUES
     (3, 'Defender'),
     (4, 'Goalkeeper');
 
-MERGE MLS.PlayerTypes T
+MERGE MLS.PlayerType T
 USING @PlayerTypeStaging S ON S.PlayerTypeID = T.PlayerTypeID
 WHEN MATCHED AND S.[Name] <> T.[Name] THEN
     UPDATE

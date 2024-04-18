@@ -4,9 +4,9 @@ namespace Data.Models
     {
         public int PlayerID { get; }
 
-        public int PlayerTypeID { get; }
+        public PlayerType PlayerTypeID { get; }
 
-        public Goalkeeper(int playerID, int playerTypeID) 
+        public Goalkeeper(int playerID, PlayerType playerTypeID) 
         {
             PlayerID = playerID;
             PlayerTypeID = playerTypeID;

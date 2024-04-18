@@ -4,12 +4,12 @@ namespace Data.Models
     {
         public int MatchClubID { get; }
         public int ClubID { get; }
-        public int MatchClubTypeID { get; }
+        public MatchClubType MatchClubTypeID { get; }
         public int MatchID { get; }
         public string Formation { get; }
         public int Score { get; }
 
-        public MatchClub(int matchClubID, int clubID, int matchClubTypeID, int matchID, string formation, int score) 
+        public MatchClub(int matchClubID, int clubID, MatchClubType matchClubTypeID, int matchID, string formation, int score) 
         {
             MatchClubID = matchClubID;
             ClubID = clubID;

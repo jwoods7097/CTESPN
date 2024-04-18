@@ -4,13 +4,13 @@ namespace Data.Models
     {
         public int MatchClubPlayerID { get; }
         public int ClubPlayerID { get; }
-        public int PlayerTypeID { get; }
+        public PlayerType PlayerTypeID { get; }
         public int MatchID { get; }
         public int ClubID { get; }
         public int? SubstitutedForPlayer { get; }
         public int? SubstitutionTime { get; }
 
-        public MatchClubPlayer(int matchClubPlayerID, int clubPlyerID, int playerTypeID, int matchID, int clubID, int? substitutedForPlayer, int? substitutionTime)
+        public MatchClubPlayer(int matchClubPlayerID, int clubPlyerID, PlayerType playerTypeID, int matchID, int clubID, int? substitutedForPlayer, int? substitutionTime)
         {
             MatchClubPlayerID = matchClubPlayerID;
             ClubPlayerID = clubPlyerID;

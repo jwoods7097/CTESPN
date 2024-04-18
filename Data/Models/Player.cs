@@ -4,11 +4,11 @@ namespace Data.Models
     {
         public int PlayerID { get; }
 
-        public int PlayerTypeID { get; }
+        public PlayerType PlayerTypeID { get; }
 
         public string Name { get; }
 
-        public Player(int playerID, int playerTypeID, string name)
+        public Player(int playerID, PlayerType playerTypeID, string name)
         {
             PlayerID = playerID;
             PlayerTypeID = playerTypeID;
