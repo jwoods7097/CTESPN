@@ -33,7 +33,7 @@ namespace PersonData.Tests
         }
 
         [TestMethod]
-        public void CreatePersonShouldWork()
+        public void CreatePlayerShouldWork()
         {
             var ptid = PlayerType.Midfielder;
             var name = GetTestString();
@@ -68,23 +68,23 @@ namespace PersonData.Tests
             var actual = repo.GetPerson(expected.Email);
 
             AssertPersonsAreEqual(expected, actual);
-        }
+        }*/
 
         [TestMethod]
         public void RetrievePersonsShouldWork()
         {
-            var p1 = CreateTestPerson();
-            var p2 = CreateTestPerson();
-            var p3 = CreateTestPerson();
+            var p1 = CreateTestPlayer();
+            var p2 = CreateTestPlayer();
+            var p3 = CreateTestPlayer();
 
-            var expected = new Dictionary<int, Person>
+            var expected = new Dictionary<int, Player>
          {
-            { p1.PersonId, p1 },
-            { p2.PersonId, p2 },
-            { p3.PersonId, p3 }
+            { p1.PlayerID, p1 },
+            { p2.PlayerID, p2 },
+            { p3.PlayerID, p3 }
          };
 
-            var actual = repo.RetrievePersons();
+            var actual = repo.RetrievePlayers();
 
             Assert.IsNotNull(actual);
             Assert.IsTrue(actual.Count >= 3, "At least three are expected.");
@@ -93,10 +93,10 @@ namespace PersonData.Tests
 
             foreach (var a in actual)
             {
-                if (!expected.ContainsKey(a.PersonId))
+                if (!expected.ContainsKey(a.PlayerID))
                     continue;
 
-                AssertPersonsAreEqual(expected[a.PersonId], a);
+                AssertPlayersAreEqual(expected[a.PlayerID], a);
 
                 matchCount += 1;
             }
@@ -104,15 +104,14 @@ namespace PersonData.Tests
             Assert.AreEqual(expected.Count, matchCount, "Not all expected persons were returned.");
         }
 
-        private static void AssertPersonsAreEqual(Person expected, Person actual)
+        private static void AssertPlayersAreEqual(Player expected, Player actual)
         {
             Assert.IsNotNull(actual);
-            Assert.AreEqual(expected.FirstName, actual.FirstName);
-            Assert.AreEqual(expected.LastName, actual.LastName);
-            Assert.AreEqual(expected.Email, actual.Email);
-        }*/
+            Assert.AreEqual(expected.PlayerTypeID, actual.PlayerTypeID);
+            Assert.AreEqual(expected.Name, actual.Name);
+        }
 
-        private Player CreateTestPerson()
+        private Player CreateTestPlayer()
         {
             return repo.CreatePlayer(PlayerType.Midfielder, GetTestString());
         }

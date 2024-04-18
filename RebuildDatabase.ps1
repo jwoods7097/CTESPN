@@ -43,7 +43,7 @@ Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\T
 
 Write-Host "Stored procedures..."
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CreatePlayer.sql"
-# Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.RetrievePersons.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.RetrievePlayers.sql"
 # Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.FetchPerson.sql"
 # Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.GetPerson.sql"
 # Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.SavePersonAddress.sql"

@@ -24,5 +24,10 @@ namespace Data
             var d = new CreatePlayerDataDelegate(pt, name);
             return executor.ExecuteNonQuery(d);
         }
+
+        public IReadOnlyList<Player> RetrievePlayers()
+        {
+            return executor.ExecuteReader(new RetrievePlayersDataDelegate());
+        }
     }
 }
