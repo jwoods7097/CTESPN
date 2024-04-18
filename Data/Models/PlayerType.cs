@@ -7,4 +7,4 @@ namespace Data.Models
         Defender = 3,
         Goalkeeper = 4
     }
-}}
+}

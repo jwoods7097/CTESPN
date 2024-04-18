@@ -1,5 +1,5 @@
 .idea
 **/.vs/
-CTESPN/obj/
-CTESPN/bin/
+**/obj/
+**/bin/
 .DS_Store

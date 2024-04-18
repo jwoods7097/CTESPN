@@ -10,7 +10,7 @@ namespace Data.Models
 
         public Club(int clubID, string name, string abbreviation, string homeLocation, string conference)
         {
-            ClubID = clubID,
+            ClubID = clubID;
             Name = name;
             Abbreviation = abbreviation;
             HomeLocation = homeLocation;

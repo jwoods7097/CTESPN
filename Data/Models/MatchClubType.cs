@@ -6,4 +6,3 @@ namespace Data.Models
         Away = 2
     }
 }
-}
