@@ -1,6 +1,7 @@
 CREATE OR ALTER PROCEDURE MLS.CreatePlayer
 	@PlayerTypeID INT,
 	@Name NVARCHAR(32),
+	@Position NVARCHAR(16),)
 	@PlayerID INT OUTPUT
 AS
 

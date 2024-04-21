@@ -1,0 +1,9 @@
+CREATE OR ALTER PROCEDURE MLS.MatchFoulsRanking
+	@StartDate DATE,
+    @EndDate DATE
+AS
+
+SELECT 
+FROM 
+
+GO

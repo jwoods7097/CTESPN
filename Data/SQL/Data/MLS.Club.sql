@@ -39,7 +39,7 @@ VALUES
 ;
 
 MERGE MLS.Club C
-USING @ClubStaging S ON S.ClubID = C.ClubID
+USING @ClubStaging S ON S.Abbreviation = C.Abbreviation
 WHEN MATCHED AND (
         S.[Name] <> C.[Name] OR
         S.Abbreviation <> C.Abbreviation OR
