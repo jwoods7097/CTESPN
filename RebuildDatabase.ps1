@@ -52,6 +52,7 @@ Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\P
 Write-Host "Inserting data..."
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Data\MLS.MatchClubType.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Data\MLS.PlayerType.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Data\MLS.Club.sql"
 
 Write-Host "Rebuild completed."
 Write-Host ""
