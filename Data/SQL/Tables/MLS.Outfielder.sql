@@ -2,7 +2,7 @@ IF OBJECT_ID(N'MLS.Outfielder') IS NULL
 BEGIN  
     CREATE TABLE MLS.Outfielder
     (
-        PlayerID INT NOT NULL IDENTITY(1, 1),
+        PlayerID INT NOT NULL,
         PlayerTypeID INT NOT NULL,
         Position NVARCHAR(16) NOT NULL
 

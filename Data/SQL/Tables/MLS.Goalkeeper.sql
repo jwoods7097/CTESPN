@@ -2,7 +2,7 @@ IF OBJECT_ID(N'MLS.Goalkeeper') IS NULL
 BEGIN  
     CREATE TABLE MLS.Goalkeeper
     (
-        PlayerID INT NOT NULL IDENTITY(1, 1),
+        PlayerID INT NOT NULL,
         PlayerTypeID INT NOT NULL
 
         CONSTRAINT [PK_MLS_Goalkeeper_PlayerID] PRIMARY KEY CLUSTERED
