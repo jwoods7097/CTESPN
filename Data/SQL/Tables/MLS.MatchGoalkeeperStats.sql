@@ -2,7 +2,7 @@ IF OBJECT_ID(N'MLS.MatchGoalkeeperStats') IS NULL
 BEGIN  
     CREATE TABLE MLS.MatchGoalkeeperStats
     (
-        MatchClubPlayerID INT NOT NULL IDENTITY(1, 1),
+        MatchClubPlayerID INT NOT NULL,
         MinutesPlayed INT NOT NULL,
         Saves INT NOT NULL,
         YellowCards INT NOT NULL,

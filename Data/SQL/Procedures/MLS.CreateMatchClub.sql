@@ -1,12 +1,14 @@
+--Do this after a Match is created
 CREATE OR ALTER PROCEDURE MLS.CreateMatchClub
     @ClubID INT,
     @MatchClubTypeID INT,
     @MatchID INT,
     @Formation NVARCHAR(8),
-    @Score INT
+    @Score INT,
+    @MatchClubID INT OUTPUT
 
-INSERT MLS.Match([Location], [Date], Attendance)
-VALUES(@Location, @Date, @Attendance)
+INSERT MLS.MatchClub(ClubID, MatchClubTypeID, MatchID, Formation, Score)
+VALUES(@ClubID, @MatchClubTypeID, @MatchID, @Formation, @Score)
 
-SET @MatchID = SCOPE_IDENTITY();
+SET @MatchClubID = SCOPE_IDENTITY();
 GO
