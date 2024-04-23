@@ -2,7 +2,7 @@ IF OBJECT_ID(N'MLS.MatchOutfielderStats') IS NULL
 BEGIN  
     CREATE TABLE MLS.MatchOutfielderStats
     (
-        MatchClubPlayerID INT NOT NULL IDENTITY(1, 1),
+        MatchClubPlayerID INT NOT NULL,
         MinutesPlayed INT NOT NULL,
         PosessionTime INT NOT NULL,
         CornerKicks INT NOT NULL,

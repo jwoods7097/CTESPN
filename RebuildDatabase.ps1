@@ -44,8 +44,15 @@ Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\T
 Write-Host "Stored procedures..."
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CreatePlayer.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.RetrievePlayers.sql"
-# Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CreateClubPlayer.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CreateClubPlayer.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CreateMatch.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CreateMatchClubPlayer.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CreateMatchEvent.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CreateMatchClub.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CareerStats.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.ClubCards.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.MatchFoulsRanking.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.TopClubGoalScorers.sql"
 
 
 Write-Host "Inserting data..."
