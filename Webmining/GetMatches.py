@@ -10,23 +10,30 @@ import pandas as pd
 
 matches_rows = []
 match_events_rows = []
+match_club_players_rows = []
 
 def get_element(id, use_xpath):
-    return WebDriverWait(driver, 10).until(
+    return WebDriverWait(driver, 1).until(
         expected_conditions.presence_of_element_located((By.XPATH if use_xpath else By.CLASS_NAME, id))
     )
 
 def get_element_text(id, use_xpath):
     return get_element(id, use_xpath).get_attribute('textContent')
 
+def get_element_link(id, use_xpath):
+    return get_element(id, use_xpath).get_attribute('href')
+
 def save():
     matches_df = pd.DataFrame(matches_rows)
     matches_df.to_excel('matches.xlsx')
 
+    match_club_players_df = pd.DataFrame(match_club_players_rows)
+    match_club_players_df.to_excel('match_club_players.xlsx')
+
     match_events_df = pd.DataFrame(match_events_rows)
     match_events_df.to_excel('match_events.xlsx')
 
-d = date(2024, 3, 10)
+d = date(2024, 4, 14)
 first_date = date(2001, 4, 7)
 
 # Start driver
@@ -59,24 +66,87 @@ try:
                 'AwayScore': get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[1]/div/div[2]/div[3]/div[2]/div[2]/div", True)[:1]
             }
 
-            # Get clubs
+            # For some god awful reason the layout of ESPN changes if the game was a 0-0 draw
+            i_hate_espn = 6
             try:
-                matches_columns['HomeClub'] = get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[6]/div/div[1]/section/div/div[1]/a[1]/span", True)
-                matches_columns['AwayClub'] = get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[6]/div/div[1]/section/div/div[1]/a[2]/span", True)
+                # Try getting an element that would be affected by this
+                get_element(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/section/div/div[1]/a[1]/span", True)
             except:
-                matches_columns['HomeClub'] = get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[5]/div/div[1]/section/div/div[1]/a[1]/span", True)
-                matches_columns['AwayClub'] = get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[5]/div/div[1]/section/div/div[1]/a[2]/span", True)
+                i_hate_espn = 5
+
+            # Get clubs
+            matches_columns['HomeClub'] = get_element_text(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/section/div/div[1]/a[1]/span", True)
+            matches_columns['AwayClub'] = get_element_text(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/section/div/div[1]/a[2]/span", True)
 
             # Get formations
             driver.get(f"https://www.espn.com/soccer/lineups/_/gameId/{matches_columns['MatchID']}")
-            try:
-                matches_columns['HomeFormation'] = get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[6]/div/div[1]/div[1]/section[1]/div/div[1]/span/span/span", True)
-                matches_columns['AwayFormation'] = get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[6]/div/div[1]/div[1]/section[2]/div/div[1]/span/span/span", True)
-            except:
-                matches_columns['HomeFormation'] = get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[5]/div/div[1]/div[1]/section[1]/div/div[1]/span/span/span", True)
-                matches_columns['AwayFormation'] = get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[5]/div/div[1]/div[1]/section[2]/div/div[1]/span/span/span", True)
-
+            matches_columns['HomeFormation'] = get_element_text(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[1]/div/div[1]/span/span/span", True)
+            matches_columns['AwayFormation'] = get_element_text(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[2]/div/div[1]/span/span/span", True)
+            
             matches_rows.append(matches_columns)
+
+            def collect_match_club_player(player_type, k, played):
+                match_club_players_columns = {
+                    'PlayerID': '',
+                    'PlayerType': player_type,
+                    'MatchID': matches_columns['MatchID'],
+                    'Club': matches_columns[f'{player_type}Club'],
+                    'SubstitutedForPlayer': '',
+                    'SubstitutionTime': '',
+                    'Played': str(played)
+                }
+
+                if played:
+                    if player_type == 'Home':
+                        # Check if player was subbed or not
+                        try:
+                            match_club_players_columns['PlayerID'] = get_element_link(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[1]/div/div[3]/div/div/div[2]/table/tbody/tr[{k}]/td/div[1]/div[1]/a", True).split('/')[-2]
+                            match_club_players_columns['SubstitutedForPlayer'] = get_element_link(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[1]/div/div[3]/div/div/div[2]/table/tbody/tr[{k}]/td/div[2]/div[1]/a", True).split('/')[-2]
+                            match_club_players_columns['SubstitutionTime'] = '+'.join([t + "'" for t in get_element(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[1]/div/div[3]/div/div/div[2]/table/tbody/tr[{k}]/td/div[2]/div[1]/div[1]", True).find_element(By.CLASS_NAME, "SoccerLineUpPlayer__Header__SubstitutionIcon").get_attribute('aria-label').split(' ')[-1].split('+')])
+                        except:
+                            match_club_players_columns['PlayerID'] = get_element_link(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[1]/div/div[3]/div/div/div[2]/table/tbody/tr[{k}]/td/div/div[1]/a", True).split('/')[-2]
+                    elif player_type == 'Away':
+                        # Check if player was subbed or not
+                        try:
+                            match_club_players_columns['PlayerID'] = get_element_link(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[2]/div/div[3]/div/div/div[2]/table/tbody/tr[{k}]/td/div[1]/div[1]/a", True).split('/')[-2]
+                            match_club_players_columns['SubstitutedForPlayer'] = get_element_link(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[2]/div/div[3]/div/div/div[2]/table/tbody/tr[{k}]/td/div[2]/div[1]/a", True).split('/')[-2]
+                            match_club_players_columns['SubstitutionTime'] = '+'.join([t + "'" for t in get_element(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[2]/div/div[3]/div/div/div[2]/table/tbody/tr[{k}]/td/div[2]/div[1]/div[1]", True).find_element(By.CLASS_NAME, "SoccerLineUpPlayer__Header__SubstitutionIcon").get_attribute('aria-label').split(' ')[-1].split('+')])
+                        except:
+                            match_club_players_columns['PlayerID'] = get_element_link(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[2]/div/div[3]/div/div/div[2]/table/tbody/tr[{k}]/td/div/div[1]/a", True).split('/')[-2]
+                    else:
+                        raise ValueError('PlayerType can only be Home or Away')
+                else:
+                    if player_type == 'Home':
+                        match_club_players_columns['PlayerID'] = get_element_link(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[1]/div/div[4]/div/div/div[2]/table/tbody/tr[{k}]/td/div/div[1]/a", True).split('/')[-2]
+                    elif player_type == 'Away':
+                        match_club_players_columns['PlayerID'] = get_element_link(f"/html/body/div[1]/div/div/div/div/main/div[2]/div/div[{i_hate_espn}]/div/div[1]/div[1]/section[2]/div/div[4]/div/div/div[2]/table/tbody/tr[{k}]/td/div/div[1]/a", True).split('/')[-2]
+                    else:
+                        raise ValueError('PlayerType can only be Home or Away')
+
+                return match_club_players_columns
+            
+            # Get MatchClubPlayers who were on the field
+            for k in range(1, 12):
+                match_club_players_rows.append(collect_match_club_player('Home', k, True))
+                match_club_players_rows.append(collect_match_club_player('Away', k, True))
+            
+            # Get Home substitutes
+            k = 1
+            while True:
+                try:
+                    match_club_players_rows.append(collect_match_club_player('Home', k, False))
+                    k += 1
+                except:
+                    break
+
+            # Get Away substitues
+            k = 1
+            while True:
+                try:
+                    match_club_players_rows.append(collect_match_club_player('Away', k, False))
+                    k += 1
+                except:
+                    break
 
             # MatchEvents
             driver.get(f"https://www.espn.com/soccer/commentary/_/gameId/{matches_columns['MatchID']}")
