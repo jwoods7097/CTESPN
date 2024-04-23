@@ -8,7 +8,8 @@ BEGIN
         MatchID INT NOT NULL,
         ClubID INT NOT NULL,
         SubstitutedForPlayer INT,
-        SubstitutionTime INT
+        SubstitutionTime INT,
+        Played BIT NOT NULL
 
         CONSTRAINT [PK_MLS_MatchClubPlayer_MatchClubPlayerID] PRIMARY KEY CLUSTERED
         (
