@@ -3,8 +3,8 @@ BEGIN
     CREATE TABLE MLS.MatchGoalkeeperStats
     (
         MatchClubPlayerID INT NOT NULL,
-        MinutesPlayed INT NOT NULL,
         Saves INT NOT NULL,
+        Fouls INT NOT NULL,
         YellowCards INT NOT NULL,
         RedCards INT NOT NULL
 
