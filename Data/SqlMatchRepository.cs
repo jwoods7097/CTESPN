@@ -33,5 +33,23 @@ namespace Data
             var d = new CreateMatchClubDataDelegate(clubid, MatchClubType.Home, matchid, formation, score);
             return executor.ExecuteNonQuery(d);
         }
+
+        public MatchClub CreateMatchAwayClub(int clubid, int matchid, string formation, int score) {
+            if (string.IsNullOrEmpty(formation)) { throw new ArgumentException(); }
+            var d = new CreateMatchClubDataDelegate(clubid, MatchClubType.Away, matchid, formation, score);
+            return executor.ExecuteNonQuery(d);
+        }
+
+        public IReadOnlyList<MatchWithClub> RetrieveMatchesWithClubs() {
+            return executor.ExecuteReader(new RetrieveMatchesWithClubsDataDelegate());
+        }
+
+        public IReadOnlyList<MatchesForClub> GetMatchesForClub() {
+            return executor.ExecuteReader(new GetMatchesForClubDataDelegate());
+        }
+
+        public IReadOnlyList<MatchesForPlayer> GetMatchesForPLayer() {
+            return executor.ExecuteReader(new GetMatchesForPlayerDataDelegate());
+        }
     }
 }

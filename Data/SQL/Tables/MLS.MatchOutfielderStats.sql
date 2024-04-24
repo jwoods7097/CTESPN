@@ -3,12 +3,12 @@ BEGIN
     CREATE TABLE MLS.MatchOutfielderStats
     (
         MatchClubPlayerID INT NOT NULL,
-        MinutesPlayed INT NOT NULL,
-        PosessionTime INT NOT NULL,
-        CornerKicks INT NOT NULL,
         Goals INT NOT NULL,
+        Assists INT NOT NULL,
         Fouls INT NOT NULL,
         Offsides INT NOT NULL,
+        Shots INT NOT NULL,
+        ShotsOnTarget INT NOT NULL,
         YellowCards INT NOT NULL,
         RedCards INT NOT NULL
 
