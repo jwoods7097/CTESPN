@@ -6,7 +6,21 @@
         xmlns:local="clr-namespace:CTESPN"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="8, 8, 8, 8"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </Window.Resources>
 
+    <Grid Button.Click="HandleClick">
+        <Border Name="ViewBox">
+
+        </Border>
     </Grid>
 </Window>
