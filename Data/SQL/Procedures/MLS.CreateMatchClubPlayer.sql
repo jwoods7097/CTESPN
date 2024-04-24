@@ -7,12 +7,12 @@ CREATE OR ALTER PROCEDURE MLS.CreateMatchClubPlayer
     @SubstitutedForPlayer INT,
     @SubstitutionTime INT,
     @Played BIT,
-    @MinutesPlayed INT,
-    @PosessionTime INT,
-    @CornerKicks INT,
     @Goals INT,
-    @Fouls INT,
+    @Assists INT,
     @Offsides INT,
+    @Shots INT,
+    @ShotsOnTarget INT,
+    @Fouls INT,
     @YellowCards INT,
     @RedCards INT,
     @Saves INT,
@@ -24,11 +24,11 @@ VALUES(@ClubPlayerID, @PlayerTypeID, @MatchID, @ClubID, @SubstitutedForPlayer, @
 SET @MatchClubPlayerID = SCOPE_IDENTITY();
 
 IF @PlayerTypeID = 4
-INSERT MLS.MatchGoalkeeperStats(MatchClubPlayerID, MinutesPlayed, Saves, YellowCards, RedCards)
-VALUES(@MatchClubPlayerID, @MinutesPlayed, @Saves, @YellowCards, @RedCards)
+INSERT MLS.MatchGoalkeeperStats(MatchClubPlayerID, Saves, Fouls, YellowCards, RedCards)
+VALUES(@MatchClubPlayerID, @Saves, @Fouls, @YellowCards, @RedCards)
 
 ELSE
-INSERT MLS.MatchOutfielderStats(MatchClubPlayerID, MinutesPlayed, PosessionTime, CornerKicks, Goals, Fouls, Offsides, YellowCards, RedCards)
-VALUES(@MatchClubPlayerID, @MinutesPlayed, @PosessionTime, @CornerKicks, @Goals, @Fouls, @Offsides, @YellowCards, @RedCards)
+INSERT MLS.MatchOutfielderStats(MatchClubPlayerID, Goals, Assists, Fouls, Offsides, Shots, ShotsOnTarget, YellowCards, RedCards)
+VALUES(@MatchClubPlayerID, @Goals, @Assists, @Fouls, @Offsides, @Shots, @ShotsOnTarget, @YellowCards, @RedCards)
 
 GO
