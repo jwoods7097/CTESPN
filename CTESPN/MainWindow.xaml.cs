@@ -20,9 +20,37 @@ namespace CTESPN
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainView mainView;
+        
+        private ClubSelectView clubSelectView;
+        
         public MainWindow()
         {
             InitializeComponent();
+            mainView = new MainView();
+            ViewBox.Child = mainView;
+            clubSelectView = new ClubSelectView();
+        }
+
+        /// <summary>
+        /// Handles Button clicks in the application
+        /// </summary>
+        /// <param name="sender">The button which was clicked</param>
+        /// <param name="e"></param>
+        private void HandleClick(object sender, RoutedEventArgs e)
+        {
+            if(e.OriginalSource is Button b)
+            {
+                switch (b.Name) {
+                    case "ClubsButton":
+                        ViewBox.Child = clubSelectView;
+                        break;
+                    case "BackButton":
+                        ViewBox.Child = mainView;
+                        break;
+                }
+                e.Handled = true;
+            }
         }
     }
 }

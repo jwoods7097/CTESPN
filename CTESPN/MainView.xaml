@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="CTESPN.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CTESPN"
+             mc:Ignorable="d">
+    <d:DesignerProperties.DesignStyle>
+        <Style TargetType="UserControl">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Height" Value="450" />
+            <Setter Property="Width" Value="800" />
+        </Style>
+    </d:DesignerProperties.DesignStyle>
+      
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
+            <Image.Source>
+                <BitmapImage UriSource="Assets/ctespn.jpg"/>
+            </Image.Source>
+        </Image>
+        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" FontSize="16">
+            Common Table Expression Soccer Performance Navigator
+        </TextBlock>
+
+        <TextBlock Grid.Row="1" Grid.Column="2">
+            Click to View:
+        </TextBlock>
+
+        <Button Name="ClubsButton" Grid.Row="2" Grid.Column="1">
+            <TextBlock>
+                Clubs
+            </TextBlock>
+        </Button>
+        <Button Name="PlayersButton" Grid.Row="2" Grid.Column="2">
+            <TextBlock>
+                Players
+            </TextBlock>
+        </Button>
+        <Button Name="MatchesButton" Grid.Row="2" Grid.Column="3">
+            <TextBlock>
+                Matches
+            </TextBlock>
+        </Button>
+
+        <TextBlock Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" FontSize="12" TextAlignment="Right" Margin="0, 0, 4, 4">
+            Made By: Eli Forssberg, Vinny Sun, and John Woods
+        </TextBlock>
+    </Grid>
+</UserControl>
