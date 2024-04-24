@@ -18,10 +18,10 @@ namespace Data
             executor = new SqlCommandExecutor(connectionString);
         }
 
-        public Player CreatePlayer(PlayerType pt, string name)
+        public Player CreatePlayer(PlayerType pt, string name, string position)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException();
-            var d = new CreatePlayerDataDelegate(pt, name);
+            var d = new CreatePlayerDataDelegate(pt, name, position);
             return executor.ExecuteNonQuery(d);
         }
 

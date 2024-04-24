@@ -8,11 +8,14 @@ namespace Data.Models
 
         public string Name { get; }
 
-        public Player(int playerID, PlayerType playerTypeID, string name)
+        public string? Position { get; }
+
+        public Player(int playerID, PlayerType playerTypeID, string name, string? position)
         {
             PlayerID = playerID;
             PlayerTypeID = playerTypeID;
             Name = name;
+            Position = position;
         }
     }
 }

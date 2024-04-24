@@ -16,7 +16,7 @@ namespace Data.DataDelegates
 
             while (reader.Read())
             {
-                p.Add(new Player(reader.GetInt32("PlayerID"), reader.GetValue<PlayerType>("PlayerTypeID"), reader.GetString("Name")));
+                p.Add(new Player(reader.GetInt32("PlayerID"), reader.GetValue<PlayerType>("PlayerTypeID"), reader.GetString("Name"), reader.IsDbNull("Position") ? null : reader.GetString("Position")));
             }
 
             return p;

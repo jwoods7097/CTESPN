@@ -3,7 +3,7 @@ CREATE OR ALTER PROCEDURE MLS.ClubCards
     @EndDate DATE
 AS
 SELECT C.ClubID, C.Name, C.Abbreviation,
-    (SUM(MOS.YellowCards) + SUM(MGS.YelloCards)) AS YellowCards,
+    (SUM(MOS.YellowCards) + SUM(MGS.YellowCards)) AS YellowCards,
     (SUM(MOS.RedCards) + SUM(MGS.RedCards)) AS RedCards
 FROM MLS.Club C
     INNER JOIN MLS.ClubPlayer CP ON C.ClubID = CP.ClubID

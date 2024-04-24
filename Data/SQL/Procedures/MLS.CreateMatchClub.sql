@@ -6,7 +6,7 @@ CREATE OR ALTER PROCEDURE MLS.CreateMatchClub
     @Formation NVARCHAR(8),
     @Score INT,
     @MatchClubID INT OUTPUT
-
+AS
 INSERT MLS.MatchClub(ClubID, MatchClubTypeID, MatchID, Formation, Score)
 VALUES(@ClubID, @MatchClubTypeID, @MatchID, @Formation, @Score)
 

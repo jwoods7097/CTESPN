@@ -13,5 +13,6 @@ namespace DataAccess
       string GetString(string name);
       T GetValue<T>(string name);
       T GetValue<T>(string name, T ifDbNull);
+      bool IsDbNull(string name);
    }
 }

@@ -37,12 +37,14 @@ namespace PersonData.Tests
         {
             var ptid = PlayerType.Midfielder;
             var name = GetTestString();
+            var position = "CAM";
 
-            var actual = repo.CreatePlayer(ptid, name);
+            var actual = repo.CreatePlayer(ptid, name, position);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(ptid, actual.PlayerTypeID);
             Assert.AreEqual(name, actual.Name);
+            Assert.AreEqual(position, actual.Position);
         }
 
         /*[TestMethod]
@@ -109,11 +111,13 @@ namespace PersonData.Tests
             Assert.IsNotNull(actual);
             Assert.AreEqual(expected.PlayerTypeID, actual.PlayerTypeID);
             Assert.AreEqual(expected.Name, actual.Name);
+            if (expected.Position == null) Assert.IsNull(actual.Position);
+            else Assert.AreEqual(expected.Position, actual.Position);
         }
 
         private Player CreateTestPlayer()
         {
-            return repo.CreatePlayer(PlayerType.Midfielder, GetTestString());
+            return repo.CreatePlayer(PlayerType.Midfielder, GetTestString(), "CAM");
         }
     }
 }
