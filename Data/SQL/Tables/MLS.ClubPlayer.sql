@@ -63,13 +63,13 @@ IF NOT EXISTS
         SELECT *
         FROM sys.key_constraints kc
         WHERE kc.parent_object_id = OBJECT_ID(N'MLS.ClubPlayer')
-            AND kc.[name] = N'UK_MLS_ClubPlayer_ClubPlayerIDPlayerTypeIDClubID'
+            AND kc.[name] = N'UK_MLS_ClubPlayer_PlayerIDPlayerTypeIDClubID'
     )
 BEGIN
     ALTER TABLE MLS.ClubPlayer
     ADD CONSTRAINT [UK_MLS_ClubPlayer_ClubPlayerIDPlayerTypeIDClubID] UNIQUE NONCLUSTERED
     (
-        ClubPlayerID,
+        PlayerID,
         PlayerTypeID,
         ClubID
     )

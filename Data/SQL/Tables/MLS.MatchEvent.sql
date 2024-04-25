@@ -4,7 +4,7 @@ BEGIN
     (
         MatchEventID INT NOT NULL IDENTITY(1, 1),
         MatchID INT NOT NULL,
-        [Time] INT,
+        [Time] NVARCHAR(16),
         Commentary NVARCHAR(2048) NOT NULL
 
         CONSTRAINT [PK_MLS_MatchEvent_MatchEventID] PRIMARY KEY CLUSTERED

@@ -1,0 +1,8 @@
+14.0
+5
+1       SQLCHAR             0       12      ","     1     ClubPlayerID                            ""
+2       SQLCHAR             0       12      ","     2     PlayerID                          ""
+3       SQLCHAR             0       12      ","     3     PlayerTypeID                       ""
+4       SQLCHAR             0       12      ","     4     ClubID                               ""
+5       SQLCHAR             0       12      "\r\n"     5     DateStarted                             ""
+

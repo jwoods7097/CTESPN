@@ -6,5 +6,5 @@
 4       SQLCHAR             0       12      ","     4     MatchID                                      ""
 5       SQLCHAR             0       12      ","     5     ClubID                                       ""
 6       SQLCHAR             0       12      ","     6     SubstitutedForPlayer                         ""
-7       SQLCHAR             0       12      ","     7     SubstitutionTime                             ""
+7       SQLCHAR             0       16      ","     7     SubstitutionTime                             SQL_Latin1_General_CP1_CI_AS
 8       SQLCHAR             0       1       "\r\n"   8     Played                                       ""

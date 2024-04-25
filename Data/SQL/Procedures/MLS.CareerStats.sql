@@ -13,7 +13,7 @@ SELECT P.PlayerID, P.PlayerTypeID, P.[Name],
     SUM(IIF(P.PlayerTypeID = 4, MGS.RedCards, MOS.RedCards)) AS RedCards
 FROM MLS.Player P
     INNER JOIN MLS.ClubPlayer CP ON CP.PlayerID = P.PlayerID AND CP.PlayerTypeID = P.PlayerTypeID
-    INNER JOIN MLS.MatchClubPlayer MCP ON CP.ClubPlayerID = MCP.ClubPlayerID AND CP.PlayerTypeID = MCP.PlayerTypeID AND CP.ClubID = MCP.ClubID
+    INNER JOIN MLS.MatchClubPlayer MCP ON CP.PlayerID = MCP.PlayerID AND CP.PlayerTypeID = MCP.PlayerTypeID AND CP.ClubID = MCP.ClubID
     INNER JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID
     INNER JOIN MLS.MatchGoalkeeperStats MGS ON MCP.MatchClubPlayerID = MGS.MatchClubPlayerID
 GROUP BY P.PlayerID, P.PlayerTypeID, P.[Name]

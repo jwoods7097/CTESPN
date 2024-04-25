@@ -7,7 +7,7 @@ SELECT C.ClubID, C.Name, C.Abbreviation,
     (SUM(MOS.RedCards) + SUM(MGS.RedCards)) AS RedCards
 FROM MLS.Club C
     INNER JOIN MLS.ClubPlayer CP ON C.ClubID = CP.ClubID
-    INNER JOIN MLS.MatchClubPlayer MCP ON MCP.ClubPlayerID = CP.ClubPlayerID AND MCP.PlayerTypeID = MCP.PlayerTypeID AND MCP.ClubID = CP.ClubID
+    INNER JOIN MLS.MatchClubPlayer MCP ON MCP.PlayerID = CP.PlayerID AND MCP.PlayerTypeID = MCP.PlayerTypeID AND MCP.ClubID = CP.ClubID
     INNER JOIN MLS.MatchClub MC ON MCP.ClubID = MC.ClubID AND MCP.MatchID = MC.MatchID
     INNER JOIN MLS.Match M ON M.MatchID = MC.MatchID
     INNER JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID

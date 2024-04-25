@@ -1,0 +1,8 @@
+14.0
+6
+1       SQLCHAR             0       12      ","     1     MathClubID                            ""
+2       SQLCHAR             0       12      ","     2     ClubID                                ""
+3       SQLCHAR             0       12      ","     3     MatchClubTypeID                       ""
+4       SQLCHAR             0       12      ","     4     MatchID                               ""
+5       SQLCHAR             0       12      ","     5     Formation                              SQL_Latin1_General_CP1_CI_AS
+6       SQLCHAR             0       12      "\r\n"     6     Score                                 ""

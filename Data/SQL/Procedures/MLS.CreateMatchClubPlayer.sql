@@ -1,6 +1,6 @@
 --Do this after MatchClub and ClubPlayer are created
 CREATE OR ALTER PROCEDURE MLS.CreateMatchClubPlayer
-    @ClubPlayerID INT,
+    @PlayerID INT,
     @PlayerTypeID INT,
     @MatchID INT,
     @ClubID INT,
@@ -18,8 +18,8 @@ CREATE OR ALTER PROCEDURE MLS.CreateMatchClubPlayer
     @Saves INT,
     @MatchClubPlayerID INT OUTPUT
 AS
-INSERT MLS.MatchClubPlayer(ClubPlayerID, PlayerTypeID, MatchID, ClubID, SubstitutedForPlayer, SubstitutionTime, Played)
-VALUES(@ClubPlayerID, @PlayerTypeID, @MatchID, @ClubID, @SubstitutedForPlayer, @SubstitutionTime, @Played)
+INSERT MLS.MatchClubPlayer(PlayerID, PlayerTypeID, MatchID, ClubID, SubstitutedForPlayer, SubstitutionTime, Played)
+VALUES(@PlayerID, @PlayerTypeID, @MatchID, @ClubID, @SubstitutedForPlayer, @SubstitutionTime, @Played)
 
 SET @MatchClubPlayerID = SCOPE_IDENTITY();
 

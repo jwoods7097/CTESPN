@@ -2,30 +2,15 @@ IF OBJECT_ID(N'MLS.Player') IS NULL
 BEGIN
     CREATE TABLE MLS.Player
     (
-        PlayerID INT NOT NULL IDENTITY(1, 1),
+        PlayerID INT NOT NULL,
         PlayerTypeID INT NOT NULL,
         [Name] NVARCHAR(32) NOT NULL
 
         CONSTRAINT [PK_MLS_Player_PlayerID] PRIMARY KEY CLUSTERED
         (
-            PlayerID ASC
+            PlayerID ASC,
+            PlayerTypeID ASC
         )
-    )
-END;
-
-IF NOT EXISTS
-    (
-        SELECT *
-        FROM sys.key_constraints kc
-        WHERE kc.parent_object_id = OBJECT_ID(N'MLS.Player')
-            AND kc.[name] = N'UK_MLS_Player_PlayerIDPlayerTypeID'
-    )
-BEGIN
-    ALTER TABLE MLS.Player
-    ADD CONSTRAINT [UK_MLS_Player_PlayerIDPlayerTypeID] UNIQUE NONCLUSTERED
-    (
-        PlayerID,
-        PlayerTypeID
     )
 END;
 

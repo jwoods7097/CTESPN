@@ -7,7 +7,8 @@ BEGIN
 
         CONSTRAINT [PK_MLS_Goalkeeper_PlayerID] PRIMARY KEY CLUSTERED
         (
-            PlayerID ASC
+            PlayerID ASC,
+            PlayerTypeID ASC
         )
     )
 END;

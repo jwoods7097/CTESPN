@@ -8,7 +8,8 @@ BEGIN
 
         CONSTRAINT [PK_MLS_Outfielder_PlayerID] PRIMARY KEY CLUSTERED
         (
-            PlayerID ASC
+            PlayerID ASC,
+            PlayerTypeID ASC
         )
     )
 END;

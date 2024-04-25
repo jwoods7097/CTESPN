@@ -2,7 +2,7 @@ IF OBJECT_ID(N'MLS.Match') IS NULL
 BEGIN  
     CREATE TABLE MLS.[Match]
     (
-        MatchID INT NOT NULL IDENTITY(1, 1),
+        MatchID INT NOT NULL,
         [Location] NVARCHAR(64) NOT NULL,
         [Date] DATE NOT NULL,
         Attendance INT NOT NULL

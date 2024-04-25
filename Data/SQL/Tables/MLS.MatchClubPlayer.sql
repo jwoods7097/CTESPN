@@ -3,12 +3,12 @@ BEGIN
     CREATE TABLE MLS.MatchClubPlayer
     (
         MatchClubPlayerID INT NOT NULL IDENTITY(1, 1),
-        ClubPlayerID INT NOT NULL,
+        PlayerID INT NOT NULL,
         PlayerTypeID INT NOT NULL,
         MatchID INT NOT NULL,
         ClubID INT NOT NULL,
         SubstitutedForPlayer INT,
-        SubstitutionTime INT,
+        SubstitutionTime NVARCHAR(16),
         Played BIT NOT NULL
 
         CONSTRAINT [PK_MLS_MatchClubPlayer_MatchClubPlayerID] PRIMARY KEY CLUSTERED
@@ -30,13 +30,13 @@ BEGIN
     ALTER TABLE MLS.MatchClubPlayer
     ADD CONSTRAINT [FK_MLS_MatchClubPlayer_MLS_ClubPlayer] FOREIGN KEY
     (
-        ClubPlayerID,
+        PlayerID,
         PlayerTypeID,
         ClubID
     )
     REFERENCES MLS.ClubPlayer
     (
-        ClubPlayerID,
+        PlayerID,
         PlayerTypeID,
         ClubID
     )
