@@ -4,7 +4,7 @@ BEGIN
     (
         PlayerID INT NOT NULL,
         PlayerTypeID INT NOT NULL,
-        [Name] NVARCHAR(32) NOT NULL
+        [Name] NVARCHAR(32) COLLATE Latin1_General_CI_AS NOT NULL 
 
         CONSTRAINT [PK_MLS_Player_PlayerID] PRIMARY KEY CLUSTERED
         (

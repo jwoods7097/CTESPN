@@ -2,4 +2,4 @@
 3
 1       SQLCHAR             0       12      ","     1     PlayerID                     ""
 2       SQLCHAR             0       12      ","     2     PlayerTypeID                 ""
-3       SQLCHAR             0       64      "\r\n"   3     Name                         SQL_Latin1_General_CP1_CI_AS
+3       SQLCHAR             0       64      "\r\n"   3     Name                         Latin1_General_CI_AS

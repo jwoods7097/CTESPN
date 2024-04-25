@@ -53,7 +53,7 @@ namespace CTESPN
             clubView = new ClubView();
             playerView = new PlayerView();
             addClubView = new AddClubView();
-            addPlayerView = new AddPlayerView)();
+            addPlayerView = new AddPlayerView();
         }
 
         /// <summary>
