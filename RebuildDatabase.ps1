@@ -42,6 +42,11 @@ Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\T
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Tables\MLS.MatchOutfielderStats.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Tables\MLS.MatchEvent.sql"
 
+Write-Host "Populating tables..."
+bcp CTESPN.MLS.Player in "Data\SQL\CSV\InfoForPlayerTable.csv" -S "(localdb)\MSSQLLocalDb" -T -f Data\SQL\FMT\Player.fmt
+bcp CTESPN.MLS.Outfielder in "Data\SQL\CSV\InfoForOutfielderTable.csv" -S "(localdb)\MSSQLLocalDb" -T -f Data\SQL\FMT\Outfielder.fmt
+bcp CTESPN.MLS.Goalkeeper in "Data\SQL\CSV\InfoForGoalkeeperTable.csv" -S "(localdb)\MSSQLLocalDb" -T -f Data\SQL\FMT\Goalkeeper.fmt
+
 Write-Host "Stored procedures..."
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CreatePlayer.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.RetrievePlayers.sql"
