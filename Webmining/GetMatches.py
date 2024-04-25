@@ -36,8 +36,8 @@ def save():
     match_events_df = pd.DataFrame(match_events_rows)
     match_events_df.to_excel('match_events.xlsx')
 
-d = date(2022, 6, 29)
-first_date = date(2022, 2, 26)
+d = date(2024, 4, 21)
+first_date = date(2024, 2, 21)
 
 # Start driver
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -62,12 +62,18 @@ try:
                 'AwayClub': '', 
                 'Location': get_element_text("Location__Text", False), 
                 'Date': str(d),
-                'Attendance': get_element_text("Attendance__Numbers", False).split(' ')[1], 
+                'Attendance': '', 
                 'HomeFormation': '', 
                 'AwayFormation': '', 
                 'HomeScore': get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[1]/div/div[2]/div[1]/div[2]/div[2]/div", True)[:1], 
                 'AwayScore': get_element_text("/html/body/div[1]/div/div/div/div/main/div[2]/div/div[1]/div/div[2]/div[3]/div[2]/div[2]/div", True)[:1]
             }
+
+            # Attempt to get attendance numbers
+            try:
+                matches_columns['Attendance'] = get_element_text("Attendance__Numbers", False).split(' ')[1]
+            except:
+                pass
 
             # For some god awful reason the layout of ESPN changes if the game was a 0-0 draw
             i_hate_espn = 6
