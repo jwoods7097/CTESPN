@@ -19,8 +19,6 @@
     </Window.Resources>
 
     <Grid Button.Click="HandleClick">
-        <Border Name="ViewBox">
-
-        </Border>
+        <Border Name="ViewBox"/>
     </Grid>
 </Window>

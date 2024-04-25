@@ -34,6 +34,16 @@ namespace CTESPN
         /// The view that allows you to look at individual playerss
         /// </summary>
         private PlayerView playerView;
+
+        /// <summary>
+        /// The view that allows you to add clubs
+        /// </summary>
+        private AddClubView addClubView;
+
+        /// <summary>
+        /// The view that allows you to add players
+        /// </summary>
+        private AddPlayerView addPlayerView;
         
         public MainWindow()
         {
@@ -42,6 +52,8 @@ namespace CTESPN
             ViewBox.Child = mainView;
             clubView = new ClubView();
             playerView = new PlayerView();
+            addClubView = new AddClubView();
+            addPlayerView = new AddPlayerView)();
         }
 
         /// <summary>
@@ -59,6 +71,12 @@ namespace CTESPN
                         break;
                     case "ViewPlayersButton":
                         ViewBox.Child = playerView;
+                        break;
+                    case "AddClubsButton":
+                        ViewBox.Child = addClubView;
+                        break;
+                    case "AddPlayersButton":
+                        ViewBox.Child = addPlayerView;
                         break;
                     case "BackButton":
                         ViewBox.Child = mainView;
