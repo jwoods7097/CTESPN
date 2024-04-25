@@ -28,7 +28,7 @@ try:
 except Exception as e:
     print(e)
 
-match_2023 = 'Data\SQL\CSV\InfoForMatchTable2023.csv'
+match_2023 = 'Data\SQL\CSV\InfoForMatchTable.csv'
 create_match = f'bcp CTESPN.MLS.Match in {match_2023} -S "(localdb)\MSSQLLocalDb" -T -f Data\SQL\FMT\Match.fmt' 
 
 try:
@@ -36,7 +36,7 @@ try:
 except Exception as e:
     print(e)
 
-match_event_2023 = 'Data\SQL\CSV\InfoForMatchEventTable2023.csv'
+match_event_2023 = 'Data\SQL\CSV\InfoForMatchEventTable.csv'
 create_match_event = f'bcp CTESPN.MLS.MatchEvent in {match_event_2023} -S "(localdb)\MSSQLLocalDb" -T -f Data\SQL\FMT\MatchEvent.fmt' 
 
 try:
@@ -44,7 +44,7 @@ try:
 except Exception as e:
     print(e)
 
-match_club_2023 = 'Data\SQL\CSV\InfoForMatchClubTable2023.csv'
+match_club_2023 = 'Data\SQL\CSV\InfoForMatchClubTable.csv'
 create_match_club = f'bcp CTESPN.MLS.MatchClub in {match_club_2023} -S "(localdb)\MSSQLLocalDb" -T -f Data\SQL\FMT\MatchClub.fmt'
 
 try:
@@ -52,7 +52,7 @@ try:
 except Exception as e:
     print(e)
 
-club_player_2023 = 'Data\SQL\CSV\InfoForClubPlayerTable2023.csv'
+club_player_2023 = 'Data\SQL\CSV\InfoForClubPlayerTable.csv'
 create_club_player = f'bcp CTESPN.MLS.ClubPlayer in {club_player_2023} -S "(localdb)\MSSQLLocalDb" -T -f Data\SQL\FMT\ClubPlayer.fmt -k'
 
 try:
@@ -60,7 +60,7 @@ try:
 except Exception as e:
     print(e)
 
-match_club_player_2023 = 'Data\SQL\CSV\InfoForMatchClubPlayerTable2023.csv'
+match_club_player_2023 = 'Data\SQL\CSV\InfoForMatchClubPlayerTable.csv'
 create_match_club_player = f'bcp CTESPN.MLS.MatchClubPlayer in {match_club_player_2023} -S "(localdb)\MSSQLLocalDb" -T -f Data\SQL\FMT\MatchClubPlayer.fmt'
 
 try:
@@ -68,7 +68,7 @@ try:
 except Exception as e:
     print(e)
 
-match_outfielder_stats_2023 = 'Data\SQL\CSV\InfoForMatchOutfielderStats2023.csv'
+match_outfielder_stats_2023 = 'Data\SQL\CSV\InfoForMatchOutfielderStats.csv'
 create_match_outfielder_stats = f'bcp CTESPN.MLS.MatchOutfielderStats in {match_outfielder_stats_2023} -S "(localdb)\MSSQLLocalDb" -T -f Data\SQL\FMT\MatchOutfielderStats.fmt'
 
 try:
@@ -76,7 +76,7 @@ try:
 except Exception as e:
     print(e)
 
-match_goalkeeper_stats_2023 = 'Data\SQL\CSV\InfoForMatchGoalkeeperStats2023.csv'
+match_goalkeeper_stats_2023 = 'Data\SQL\CSV\InfoForMatchGoalkeeperStats.csv'
 create_match_goalkeeper_stats = f'bcp CTESPN.MLS.MatchGoalkeeperStats in {match_goalkeeper_stats_2023} -S "(localdb)\MSSQLLocalDb" -T -f Data\SQL\FMT\MatchGoalkeeperStats.fmt'
 
 try:

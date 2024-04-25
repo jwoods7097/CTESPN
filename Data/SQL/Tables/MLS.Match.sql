@@ -5,7 +5,7 @@ BEGIN
         MatchID INT NOT NULL,
         [Location] NVARCHAR(64) NOT NULL,
         [Date] DATE NOT NULL,
-        Attendance INT NOT NULL
+        Attendance INT
 
         CONSTRAINT [PK_MLS_Match_MatchID] PRIMARY KEY CLUSTERED
         (

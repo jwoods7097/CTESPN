@@ -1,21 +1,21 @@
 import pandas as pd
 
 # columns_to_read = ['MatchID', 'Location', 'Date', 'Attendance']
-# df = pd.read_excel('../RawData/matches_2023.xlsx', usecols=columns_to_read)
+# df = pd.read_excel('../RawData/matches_all.xlsx', usecols=columns_to_read)
 # df['Location'] = df['Location'].str.replace(',', '')
 # df['Attendance'] = df['Attendance'].str.replace('\"', '')
 # df['Attendance'] = df['Attendance'].str.replace(',', '')
 #
 # df = df.drop_duplicates()
 #
-# df.to_csv('../Data/SQL/CSV/InfoForMatchTable2023.csv', index=False)
-
+# df.to_csv('../Data/SQL/CSV/InfoForMatchTable.csv', index=False)
+#
 # columns_to_read = ['MatchID', 'Time', 'Commentary']
-# df = pd.read_excel('../RawData/match_events_2023.xlsx', usecols=columns_to_read)
+# df = pd.read_excel('../RawData/match_events_all.xlsx', usecols=columns_to_read)
 #
 # df = df.drop_duplicates()
 #
-# df.to_csv('../Data/SQL/CSV/InfoForMatchEventTable2023.csv', index=True)
+# df.to_csv('../Data/SQL/CSV/InfoForMatchEventTable.csv', index=True)
 
 club_mapping = {
     'ATL': 1,
@@ -49,7 +49,7 @@ club_mapping = {
     'VAN': 29
 }
 
-# df = pd.read_excel('../RawData/matches_2023.xlsx')
+# df = pd.read_excel('../RawData/matches_all.xlsx')
 #
 # home_df = df[['MatchID', 'HomeClub', 'HomeFormation', 'HomeScore']].rename(columns={'HomeClub': 'Club', 'HomeFormation': 'Formation', 'HomeScore': 'Score'})
 # home_df['MatchClubTypeID'] = 1
@@ -58,6 +58,8 @@ club_mapping = {
 # away_df['MatchClubTypeID'] = 2
 #
 # result_df = pd.concat([home_df, away_df], ignore_index=True)
+#
+# result_df = result_df[result_df['Club'].isin(club_mapping.keys())]
 #
 # result_df['ClubID'] = result_df['Club'].map(club_mapping).astype(int)
 #
@@ -68,7 +70,8 @@ club_mapping = {
 #
 # result_df = result_df.drop_duplicates()
 #
-# result_df.to_csv('../Data/SQL/CSV/InfoForMatchClubTable2023.csv', index=True)
+# result_df.to_csv('../Data/SQL/CSV/InfoForMatchClubTable.csv', index=True)
+
 
 # players = pd.read_csv('../Data/SQL/CSV/InfoForPlayerTable.csv', header=None)
 #
@@ -76,13 +79,17 @@ club_mapping = {
 #
 # players.drop('Name', axis=1, inplace=True)
 #
-# mcp = pd.read_excel('../RawData/match_club_players_2023.xlsx', usecols=['PlayerID', 'Club'])
+# mcp = pd.read_excel('../RawData/match_club_players_all.xlsx', usecols=['PlayerID', 'Club'])
 #
 # merged = pd.merge(players, mcp, on='PlayerID')
 #
 # merged['DateStarted'] = '2021-01-01'
 #
+# merged = merged[merged['Club'].isin(club_mapping.keys())]
+#
 # merged = merged.drop_duplicates()
+#
+# merged = merged[merged.apply(lambda row: row.name in club_mapping.keys(), axis=1)]
 #
 # merged['ClubID'] = merged['Club'].map(club_mapping).astype(int)
 # merged.drop('Club', axis=1, inplace=True)
@@ -90,10 +97,10 @@ club_mapping = {
 # column_order = ['PlayerID', 'PlayerTypeID', 'ClubID', 'DateStarted']
 # merged = merged[column_order]
 #
-# merged.to_csv('../Data/SQL/CSV/InfoForClubPlayerTable2023.csv', index=True)
+# merged.to_csv('../Data/SQL/CSV/InfoForClubPlayerTable.csv', index=True)
 
 
-# df = pd.read_excel('../RawData/match_club_players_2023.xlsx')
+# df = pd.read_excel('../RawData/match_club_players_all.xlsx')
 #
 # players = pd.read_csv('../Data/SQL/CSV/InfoForPlayerTable.csv', header=None)
 #
@@ -101,9 +108,11 @@ club_mapping = {
 #
 # players.drop('Name', axis=1, inplace=True)
 #
-# df['ClubID'] = df['Club'].map(club_mapping).astype(int)
-#
 # df = pd.merge(df, players, on='PlayerID')
+#
+# df = df[df['Club'].isin(club_mapping.keys())]
+#
+# df['ClubID'] = df['Club'].map(club_mapping).astype(int)
 #
 # df.drop('Club', axis=1, inplace=True)
 # df.drop('Unnamed: 0.1', axis=1, inplace=True)
@@ -113,56 +122,53 @@ club_mapping = {
 #
 # df['Played'] = df['Played'].astype(int)
 #
-# df.to_csv('../Data/SQL/CSV/InfoForMatchClubPlayerTable2023.csv', index=True, index_label='MatchClubPlayerID')
+# df.to_csv('../Data/SQL/CSV/InfoForMatchClubPlayerTable.csv', index=True, index_label='MatchClubPlayerID')
 
 
-position_map = {'G': 4, 'D': 3, 'M': 2, 'F': 1}
-
-
-df = pd.read_csv('../Data/SQL/CSV/InfoForMatchClubPlayerTable2023.csv', usecols=['MatchClubPlayerID', 'PlayerID', 'PlayerTypeID', 'MatchID'])
-
-stats = pd.read_excel('../RawData/2023-Player-Stats.xlsx', header=0)
-
-stats['PlayerTypeID'] = stats["Position"].map(position_map)
-stats.drop("Position", axis=1, inplace=True)
-
-merged = pd.merge(df, stats, on=['PlayerID', 'PlayerTypeID', 'MatchID'])
-merged = merged[merged['PlayerTypeID'] != 4]
-merged.drop("Name", axis=1, inplace=True)
-merged.drop("PlayerTypeID", axis=1, inplace=True)
-merged.drop("PlayerID", axis=1, inplace=True)
-merged.drop("MatchID", axis=1, inplace=True)
-merged.drop("Year", axis=1, inplace=True)
-
-column_order = ['MatchClubPlayerID', 'Goals', 'Assists', 'Fouls', 'Offsides', 'Shots', 'ShotsOnTarget', 'YellowCards', 'RedCards']
-merged = merged[column_order]
-
-merged.to_csv('../Data/SQL/CSV/InfoForMatchOutfielderStats2023.csv', index=False)
-
-
-
-df = pd.read_csv('../Data/SQL/CSV/InfoForMatchClubPlayerTable2023.csv', usecols=['MatchClubPlayerID', 'PlayerID', 'PlayerTypeID', 'MatchID'])
-
-stats = pd.read_excel('../RawData/2023-Player-Stats.xlsx', header=0, sheet_name='Goalkeepers')
-
-stats['PlayerTypeID'] = stats["Position"].map(position_map)
-stats.drop("Position", axis=1, inplace=True)
-
-print(df.head(10))
-print(stats.head(10))
-
-merged = pd.merge(df, stats, on=['PlayerID', 'PlayerTypeID', 'MatchID'])
-merged = merged[merged['PlayerTypeID'] == 4]
-merged.drop("Name", axis=1, inplace=True)
-merged.drop("PlayerTypeID", axis=1, inplace=True)
-merged.drop("PlayerID", axis=1, inplace=True)
-merged.drop("MatchID", axis=1, inplace=True)
-merged.drop("Year", axis=1, inplace=True)
-merged.drop("Clean_Sheets", axis=1, inplace=True)
-merged.drop("Goals_Against", axis=1, inplace=True)
-merged.drop("Goals", axis=1, inplace=True)
-merged.drop("Assists", axis=1, inplace=True)
-merged.drop("Fouls_Against", axis=1, inplace=True)
-merged["RedCards"] = 0
-
-merged.to_csv('../Data/SQL/CSV/InfoForMatchGoalkeeperStats2023.csv', index=False)
+# position_map = {'G': 4, 'D': 3, 'M': 2, 'F': 1}
+#
+#
+# df = pd.read_csv('../Data/SQL/CSV/InfoForMatchClubPlayerTable.csv', usecols=['MatchClubPlayerID', 'PlayerID', 'PlayerTypeID', 'MatchID'])
+#
+# stats = pd.read_excel('../RawData/All-Player-Stats.xlsx', header=0)
+#
+# stats['PlayerTypeID'] = stats["Position"].map(position_map)
+# stats.drop("Position", axis=1, inplace=True)
+#
+# merged = pd.merge(df, stats, on=['PlayerID', 'PlayerTypeID', 'MatchID'])
+# merged = merged[merged['PlayerTypeID'] != 4]
+# merged.drop("Name", axis=1, inplace=True)
+# merged.drop("PlayerTypeID", axis=1, inplace=True)
+# merged.drop("PlayerID", axis=1, inplace=True)
+# merged.drop("MatchID", axis=1, inplace=True)
+# merged.drop("Year", axis=1, inplace=True)
+#
+# column_order = ['MatchClubPlayerID', 'Goals', 'Assists', 'Fouls', 'Offsides', 'Shots', 'ShotsOnTarget', 'YellowCards', 'RedCards']
+# merged = merged[column_order]
+#
+# merged.to_csv('../Data/SQL/CSV/InfoForMatchOutfielderStats.csv', index=False)
+#
+#
+#
+# df = pd.read_csv('../Data/SQL/CSV/InfoForMatchClubPlayerTable.csv', usecols=['MatchClubPlayerID', 'PlayerID', 'PlayerTypeID', 'MatchID'])
+#
+# stats = pd.read_excel('../RawData/All-Player-Stats.xlsx', header=0, sheet_name='Goalkeepers')
+#
+# stats['PlayerTypeID'] = stats["Position"].map(position_map)
+# stats.drop("Position", axis=1, inplace=True)
+#
+# merged = pd.merge(df, stats, on=['PlayerID', 'PlayerTypeID', 'MatchID'])
+# merged = merged[merged['PlayerTypeID'] == 4]
+# merged.drop("Name", axis=1, inplace=True)
+# merged.drop("PlayerTypeID", axis=1, inplace=True)
+# merged.drop("PlayerID", axis=1, inplace=True)
+# merged.drop("MatchID", axis=1, inplace=True)
+# merged.drop("Year", axis=1, inplace=True)
+# merged.drop("Clean_Sheets", axis=1, inplace=True)
+# merged.drop("Goals_Against", axis=1, inplace=True)
+# merged.drop("Goals", axis=1, inplace=True)
+# merged.drop("Assists", axis=1, inplace=True)
+# merged.drop("Fouls_Against", axis=1, inplace=True)
+# merged["RedCards"] = 0
+#
+# merged.to_csv('../Data/SQL/CSV/InfoForMatchGoalkeeperStats.csv', index=False)
