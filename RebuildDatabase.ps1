@@ -13,6 +13,7 @@ Param(
 # Install-Module -Name SqlServer -Scope CurrentUser
 
 $CurrentDrive = (Get-Location).Drive.Name + ":"
+Set-Location $CurrentDrive
 
 Write-Host ""
 Write-Host "Rebuilding database $Database on $Server..."
@@ -63,5 +64,3 @@ Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\D
 
 Write-Host "Rebuild completed."
 Write-Host ""
-
-Set-Location $CurrentDrive
