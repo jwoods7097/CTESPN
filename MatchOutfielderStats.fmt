@@ -1,0 +1,11 @@
+14.0
+9
+1       SQLCHAR             0       12      ","     1     MatchClubPlayerID                      ""
+2       SQLCHAR             0       12      ","     2     Goals                                  ""
+3       SQLCHAR             0       12      ","     3     Assists                                ""
+4       SQLCHAR             0       12      ","     4     Fouls                                  ""
+5       SQLCHAR             0       12      ","     5     Offsides                               ""
+6       SQLCHAR             0       12      ","     6     Shots                                  ""
+7       SQLCHAR             0       12      ","     7     ShotsOnTarget                          ""
+8       SQLCHAR             0       12      ","     8     YellowCards                            ""
+9       SQLCHAR             0       12      "\r\n"   9     RedCards                               ""

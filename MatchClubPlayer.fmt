@@ -1,0 +1,10 @@
+14.0
+8
+1       SQLCHAR             0       12      ","     1     MatchClubPlayerID                            ""
+2       SQLCHAR             0       12      ","     2     ClubPlayerID                                 ""
+3       SQLCHAR             0       12      ","     3     PlayerTypeID                                 ""
+4       SQLCHAR             0       12      ","     4     MatchID                                      ""
+5       SQLCHAR             0       12      ","     5     ClubID                                       ""
+6       SQLCHAR             0       12      ","     6     SubstitutedForPlayer                         ""
+7       SQLCHAR             0       12      ","     7     SubstitutionTime                             ""
+8       SQLCHAR             0       1       "\r\n"   8     Played                                       ""

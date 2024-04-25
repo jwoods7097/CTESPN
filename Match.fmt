@@ -1,0 +1,6 @@
+14.0
+4
+1       SQLCHAR             0       12      ","     1     MatchID                  ""
+2       SQLCHAR             0       128     ","     2     Location                 SQL_Latin1_General_CP1_CI_AS
+3       SQLCHAR             0       11      ","     3     Date                     ""
+4       SQLCHAR             0       12      "\r\n"   4     Attendance               ""
