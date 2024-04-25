@@ -35,7 +35,7 @@ namespace Data.DataDelegates
 
         public override Match Translate(Command command)
         {
-            return new Match(command.GetParameterValue<int>("MatchID"), Location, Date, Attendance)
+            return new Match(command.GetParameterValue<int>("MatchID"), Location, Date, Attendance);
         }
     }
 }

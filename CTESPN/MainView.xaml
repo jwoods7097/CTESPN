@@ -19,45 +19,46 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Image Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
+        <Image Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
             <Image.Source>
                 <BitmapImage UriSource="Assets/ctespn.jpg"/>
             </Image.Source>
         </Image>
-        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" FontSize="16">
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontSize="16">
             Common Table Expression Soccer Performance Navigator
         </TextBlock>
 
-        <TextBlock Grid.Row="1" Grid.Column="2">
-            Click to View:
-        </TextBlock>
+        <Button Name="ViewClubsButton" Grid.Row="2" Grid.Column="1">
+            <TextBlock>
+                View Clubs
+            </TextBlock>
+        </Button>
+        <Button Name="ViewPlayersButton" Grid.Row="2" Grid.Column="2">
+            <TextBlock>
+                View Players
+            </TextBlock>
+        </Button>
+        <Button Name="AddClubsButton" Grid.Row="3" Grid.Column="1">
+            <TextBlock>
+                Add Clubs
+            </TextBlock>
+        </Button>
+        <Button Name="AddPlayersButton" Grid.Row="3" Grid.Column="2">
+            <TextBlock>
+                Add Players
+            </TextBlock>
+        </Button>
 
-        <Button Name="ClubsButton" Grid.Row="2" Grid.Column="1">
-            <TextBlock>
-                Clubs
-            </TextBlock>
-        </Button>
-        <Button Name="PlayersButton" Grid.Row="2" Grid.Column="2">
-            <TextBlock>
-                Players
-            </TextBlock>
-        </Button>
-        <Button Name="MatchesButton" Grid.Row="2" Grid.Column="3">
-            <TextBlock>
-                Matches
-            </TextBlock>
-        </Button>
-
-        <TextBlock Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" FontSize="12" TextAlignment="Right" Margin="0, 0, 4, 4">
+        <TextBlock Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="12" TextAlignment="Right" Margin="0, 0, 4, 4">
             Made By: Eli Forssberg, Vinny Sun, and John Woods
         </TextBlock>
     </Grid>

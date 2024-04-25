@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CTESPN
 {
     /// <summary>
-    /// Interaction logic for ClubSelectView.xaml
+    /// Interaction logic for MatchView.xaml
     /// </summary>
-    public partial class ClubSelectView : UserControl
+    public partial class MatchView : UserControl
     {
-        public ClubSelectView()
+        public MatchView()
         {
             InitializeComponent();
         }

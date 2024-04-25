@@ -20,16 +20,28 @@ namespace CTESPN
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The main menu of the application
+        /// </summary>
         private MainView mainView;
         
-        private ClubSelectView clubSelectView;
+        /// <summary>
+        /// The view that allows you to look at individual clubs
+        /// </summary>
+        private ClubView clubView;
+
+        /// <summary>
+        /// The view that allows you to look at individual playerss
+        /// </summary>
+        private PlayerView playerView;
         
         public MainWindow()
         {
             InitializeComponent();
             mainView = new MainView();
             ViewBox.Child = mainView;
-            clubSelectView = new ClubSelectView();
+            clubView = new ClubView();
+            playerView = new PlayerView();
         }
 
         /// <summary>
@@ -42,8 +54,11 @@ namespace CTESPN
             if(e.OriginalSource is Button b)
             {
                 switch (b.Name) {
-                    case "ClubsButton":
-                        ViewBox.Child = clubSelectView;
+                    case "ViewClubsButton":
+                        ViewBox.Child = clubView;
+                        break;
+                    case "ViewPlayersButton":
+                        ViewBox.Child = playerView;
                         break;
                     case "BackButton":
                         ViewBox.Child = mainView;
