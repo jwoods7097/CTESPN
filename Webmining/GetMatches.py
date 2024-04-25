@@ -18,7 +18,10 @@ def get_element(id, use_xpath):
     )
 
 def get_element_text(id, use_xpath):
-    return get_element(id, use_xpath).get_attribute('textContent')
+    try:
+        return get_element(id, use_xpath).get_attribute('textContent')
+    except:
+        return ''
 
 def get_element_link(id, use_xpath):
     return get_element(id, use_xpath).get_attribute('href')
@@ -33,8 +36,8 @@ def save():
     match_events_df = pd.DataFrame(match_events_rows)
     match_events_df.to_excel('match_events.xlsx')
 
-d = date(2024, 4, 14)
-first_date = date(2001, 4, 7)
+d = date(2022, 6, 29)
+first_date = date(2022, 2, 26)
 
 # Start driver
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -125,10 +128,23 @@ try:
 
                 return match_club_players_columns
             
-            # Get MatchClubPlayers who were on the field
-            for k in range(1, 12):
-                match_club_players_rows.append(collect_match_club_player('Home', k, True))
-                match_club_players_rows.append(collect_match_club_player('Away', k, True))
+            # Get Home MatchClubPlayers who were on the field
+            k = 1
+            while True:
+                try:
+                    match_club_players_rows.append(collect_match_club_player('Home', k, True))
+                    k += 1
+                except:
+                    break
+
+            # Get Away MatchClubPlayers who were on the field
+            k = 1
+            while True:
+                try:
+                    match_club_players_rows.append(collect_match_club_player('Away', k, True))
+                    k += 1
+                except:
+                    break
             
             # Get Home substitutes
             k = 1
