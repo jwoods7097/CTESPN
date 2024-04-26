@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Data;
 
 namespace CTESPN
 {
@@ -20,9 +21,12 @@ namespace CTESPN
     /// </summary>
     public partial class PlayerView : UserControl
     {
+        private const string connectionString = @"Server=(localdb)\MSSQLLocalDb;Database=CTESPN;Integrated Security=SSPI;";
+
         public PlayerView()
         {
             InitializeComponent();
+            this.DataContext = new SqlPlayerRepository(connectionString);
         }
     }
 }

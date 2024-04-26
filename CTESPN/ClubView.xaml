@@ -43,46 +43,36 @@
         <TextBlock Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" TextAlignment="Right" VerticalAlignment="Center" FontSize="14">
             Select Club:
         </TextBlock>
-        <ComboBox Name="ClubComboBox" Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0">
-            
+        <ComboBox Name="ClubComboBox" ItemsSource="{Binding Path=RetrieveClubs}" SelectedItem="{Binding Path=SelectedClub, Mode=TwoWay}" SelectedIndex="0" Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
 
         <TextBlock Grid.Row="1" Grid.Column="6" TextAlignment="Right" VerticalAlignment="Center" FontSize="14">
             Season:
         </TextBlock>
-        <ComboBox Name="SeasonComboBox" Grid.Row="1" Grid.Column="7" Margin="8,8,8,0">
+        <ComboBox Name="SeasonComboBox" ItemsSource="{Binding Path=RetrieveYears}" SelectedIndex="0" Grid.Row="1" Grid.Column="7" Margin="8,8,8,0"/>
 
-        </ComboBox>
-
-        <TextBlock Name="ClubNameTextBlock"  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" TextAlignment="Left" VerticalAlignment="Center" FontSize="32" FontWeight="Bold">
-            Atlanta United FC
-        </TextBlock>
-        <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="2">
-            <Image.Source>
-                <BitmapImage UriSource="Assets/ClubLogos/1.gif"/>
-            </Image.Source>
-        </Image>
+        <TextBlock Name="ClubNameTextBlock" Text="{Binding Path=SelectedClub.Name}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" TextAlignment="Left" VerticalAlignment="Center" FontSize="32" FontWeight="Bold"/>
+        <Image Source="{Binding Path=LogoPath}" Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
 
         <TextBlock Grid.Row="2" Grid.Column="2" TextAlignment="Right" FontSize="14" FontWeight="Bold" Margin="4">
             Abbreviation:
         </TextBlock>
-        <TextBlock Name="AbbreviationTextBlock" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" TextAlignment="Left" FontSize="14" Margin="4">
-            ATL
-        </TextBlock>
+        <TextBlock Name="AbbreviationTextBlock" Text="{Binding Path=SelectedClub.Abbreviation}" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" TextAlignment="Left" FontSize="14" Margin="4"/>
 
         <TextBlock Grid.Row="3" Grid.Column="2" TextAlignment="Right" FontSize="14" FontWeight="Bold" Margin="4">
             Location:
         </TextBlock>
-        <TextBlock Name="LocationTextBlock" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="5" TextAlignment="Left" FontSize="14" Margin="4">
-            Atlanta, Georgia, USA
-        </TextBlock>
+        <TextBlock Name="LocationTextBlock" Text="{Binding Path=SelectedClub.HomeLocation}" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="5" TextAlignment="Left" FontSize="14" Margin="4"/>
 
         <TextBlock Grid.Row="4" Grid.Column="2" TextAlignment="Right" FontSize="14" FontWeight="Bold" Margin="4">
             Conference:
         </TextBlock>
-        <TextBlock Name="ConferenceTextBlock" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="5" TextAlignment="Left" FontSize="14" Margin="4">
-            Eastern
-        </TextBlock>
+        <TextBlock Name="ConferenceTextBlock" Text="{Binding Path=SelectedClub.Conference}" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="5" TextAlignment="Left" FontSize="14" Margin="4"/>
 
         <TextBlock Grid.Row="5" Grid.Column="0" TextAlignment="Left" VerticalAlignment="Bottom" FontSize="14" Margin="4">
             Players:
@@ -103,8 +93,8 @@
         <TextBlock Grid.Row="4" Grid.Column="5" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="14" Margin="4">
             Versus:
         </TextBlock>
-        <ComboBox Name="VersusClubComboBox" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0">
-
+        <ComboBox Name="VersusClubComboBox" ItemsSource="{Binding Path=RetrieveOpponents}" SelectedIndex="0" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0">
+            
         </ComboBox>
         <TextBlock Grid.Row="5" Grid.Column="5" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="14" Margin="4">
             Sort By:
@@ -112,8 +102,6 @@
         <ComboBox Name="ClubMatchSortByComboBox" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0">
 
         </ComboBox>
-        <DataGrid Name="ClubMatchDataGrid" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="4" Margin="8">
-
-        </DataGrid>
+        <DataGrid Name="ClubMatchDataGrid" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="4" Margin="8"/>
     </Grid>
 </UserControl>

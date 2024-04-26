@@ -1,0 +1,9 @@
+CREATE OR ALTER PROCEDURE MLS.RetrieveYears
+AS
+
+SELECT DISTINCT YEAR(M.[Date]) [Year]
+FROM MLS.[Match] M
+ORDER BY [Year] ASC
+GO
+
+EXEC MLS.RetrieveYears

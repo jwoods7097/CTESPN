@@ -11,12 +11,124 @@
   <ItemGroup>
     <None Remove="Assets\ab.png" />
     <None Remove="Assets\ClubLogos\1.gif" />
+    <None Remove="Assets\ClubLogos\10.gif" />
+    <None Remove="Assets\ClubLogos\11.gif" />
+    <None Remove="Assets\ClubLogos\12.gif" />
+    <None Remove="Assets\ClubLogos\13.gif" />
+    <None Remove="Assets\ClubLogos\14.gif" />
+    <None Remove="Assets\ClubLogos\15.gif" />
+    <None Remove="Assets\ClubLogos\16.gif" />
+    <None Remove="Assets\ClubLogos\17.gif" />
+    <None Remove="Assets\ClubLogos\18.gif" />
+    <None Remove="Assets\ClubLogos\19.gif" />
+    <None Remove="Assets\ClubLogos\2.gif" />
+    <None Remove="Assets\ClubLogos\20.gif" />
+    <None Remove="Assets\ClubLogos\21.gif" />
+    <None Remove="Assets\ClubLogos\22.gif" />
+    <None Remove="Assets\ClubLogos\23.gif" />
+    <None Remove="Assets\ClubLogos\24.gif" />
+    <None Remove="Assets\ClubLogos\25.gif" />
+    <None Remove="Assets\ClubLogos\26.gif" />
+    <None Remove="Assets\ClubLogos\27.gif" />
+    <None Remove="Assets\ClubLogos\28.gif" />
+    <None Remove="Assets\ClubLogos\29.gif" />
+    <None Remove="Assets\ClubLogos\3.gif" />
+    <None Remove="Assets\ClubLogos\4.gif" />
+    <None Remove="Assets\ClubLogos\5.gif" />
+    <None Remove="Assets\ClubLogos\6.gif" />
+    <None Remove="Assets\ClubLogos\7.gif" />
+    <None Remove="Assets\ClubLogos\8.gif" />
+    <None Remove="Assets\ClubLogos\9.gif" />
     <None Remove="Assets\ctespn.jpg" />
     <None Remove="Assets\messi.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\ClubLogos\1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\10.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\11.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\12.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\13.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\14.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\15.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\16.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\17.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\18.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\19.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\20.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\21.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\22.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\23.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\24.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\25.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\26.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\27.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\28.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\29.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\4.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\5.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\6.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\7.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\8.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ClubLogos\9.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\ctespn.jpg">

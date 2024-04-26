@@ -42,7 +42,7 @@
         <TextBlock Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" TextAlignment="Right" VerticalAlignment="Center" FontSize="14">
             Select Player:
         </TextBlock>
-        <ComboBox Name="PlayerComboBox" Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0">
+        <ComboBox Name="PlayerComboBox" ItemsSource="{Binding Path=RetrievePlayers}" Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0">
 
         </ComboBox>
 

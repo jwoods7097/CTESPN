@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AddClubView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="AddPlayerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ClubView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -21,6 +27,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="AddClubView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="AddPlayerView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="ClubView.xaml">
       <SubType>Designer</SubType>
     </Page>
