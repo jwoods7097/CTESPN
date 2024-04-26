@@ -16,7 +16,7 @@ namespace Data.DataDelegates
 
             while (reader.Read())
             {
-                p.Add(new MatchesForClub(reader.GetInt32("MatchID"), reader.GetString("Location"), reader.GetValue<DateOnly>("Date"), reader.GetInt32("Attendance"), reader.GetValue<MatchClubType>("HomeOrAway"), reader.GetString("Formation"), reader.GetInt32("OpponentClub"), reader.GetInt32("Score"), reader.GetInt32("OpponentScore")));
+                p.Add(new MatchesForClub(reader.GetInt32("MatchID"), reader.GetString("Location"), reader.GetValue<DateOnly>("Date"), reader.GetInt32("Attendance"), reader.GetValue<MatchClubType>("HomeOrAway"), reader.GetString("Formation"), reader.GetString("OpponentClub"), reader.GetInt32("Score"), reader.GetInt32("OpponentScore")));
             }
 
             return p;
