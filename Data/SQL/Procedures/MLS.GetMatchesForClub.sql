@@ -17,5 +17,3 @@ FROM MLS.Match M
 WHERE HomeClub.ClubID = @ClubID OR AwayClub.ClubID = @ClubID
 ORDER BY M.[Date] DESC
 GO
-
-EXEC MLS.GetMatchesForClub 1
