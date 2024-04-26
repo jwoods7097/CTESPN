@@ -67,15 +67,15 @@
             Conference:
         </TextBlock>
         <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal" Margin="8">
-            <RadioButton VerticalAlignment="Center" GroupName="Conference" FontSize="14" Margin="0,0,8,0">
+            <RadioButton IsChecked="True" Name="EasternButton" VerticalAlignment="Center" GroupName="Conference" FontSize="14" Margin="0,0,8,0">
                 Eastern
             </RadioButton>
-            <RadioButton VerticalAlignment="Center" GroupName="Conference" FontSize="14" Margin="0,0,8,0">
+            <RadioButton Name="WesternButton" VerticalAlignment="Center" GroupName="Conference" FontSize="14" Margin="0,0,8,0">
                 Western
             </RadioButton>
         </StackPanel>
 
-        <Button Name="AddClubButton" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" MaxWidth="200">
+        <Button Name="AddClubButton" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" MaxWidth="200" Click="AddClubButton_Click">
             <TextBlock FontSize="14">
                 Add Club
             </TextBlock>

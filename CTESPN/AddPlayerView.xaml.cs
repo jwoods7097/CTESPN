@@ -24,5 +24,10 @@ namespace CTESPN
         {
             InitializeComponent();
         }
+
+        private void AddClubButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
