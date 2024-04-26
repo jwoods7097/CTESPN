@@ -17,8 +17,8 @@ SELECT P.PlayerID, P.PlayerTypeID, P.[Name],
 FROM MLS.Player P
     INNER JOIN MLS.ClubPlayer CP ON CP.PlayerID = P.PlayerID AND CP.PlayerTypeID = P.PlayerTypeID
     INNER JOIN MLS.MatchClubPlayer MCP ON CP.PlayerID = MCP.PlayerID AND CP.PlayerTypeID = MCP.PlayerTypeID AND CP.ClubID = MCP.ClubID
-    LEFT JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID
-    LEFT JOIN MLS.MatchGoalkeeperStats MGS ON MCP.MatchClubPlayerID = MGS.MatchClubPlayerID
+    LEFT JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID AND MCP.PlayerTypeID = MOS.PlayerTypeID
+    LEFT JOIN MLS.MatchGoalkeeperStats MGS ON MCP.MatchClubPlayerID = MGS.MatchClubPlayerID AND MCP.PlayerTypeID = MGS.PlayerTypeID
 GROUP BY P.PlayerID, P.PlayerTypeID, P.[Name]
 ORDER BY PlayerID ASC
 GO

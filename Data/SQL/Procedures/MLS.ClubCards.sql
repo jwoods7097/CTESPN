@@ -13,8 +13,8 @@ FROM MLS.Club C
     INNER JOIN MLS.MatchClubPlayer MCP ON MCP.PlayerID = CP.PlayerID AND MCP.PlayerTypeID = MCP.PlayerTypeID AND MCP.ClubID = CP.ClubID
     INNER JOIN MLS.MatchClub MC ON MCP.ClubID = MC.ClubID AND MCP.MatchID = MC.MatchID
     INNER JOIN MLS.Match M ON M.MatchID = MC.MatchID
-    LEFT JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID
-    LEFT JOIN MLS.MatchGoalkeeperStats MGS ON MCP.MatchClubPlayerID = MGS.MatchClubPlayerID
+    LEFT JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID AND MCP.PlayerTypeID = MOS.PlayerTypeID
+    LEFT JOIN MLS.MatchGoalkeeperStats MGS ON MCP.MatchClubPlayerID = MGS.MatchClubPlayerID AND MCP.PlayerTypeID = MGS.PlayerTypeID
 WHERE 
     M.Date BETWEEN @StartDate AND @EndDate
 GROUP BY C.ClubID, C.Name, C.Abbreviation

@@ -3,7 +3,7 @@ CREATE OR ALTER PROCEDURE MLS.GetMatchesForClub
 AS
 
 SELECT M.MatchID, M.Location, M.Date, M.Attendance, 
-    IIF(HomeClub.ClubID = @ClubID, HomeClub.MatchClubTypeID, AwayClub.MatchClubTypeID) AS HomeOrAway
+    IIF(HomeClub.ClubID = @ClubID, HomeClub.MatchClubTypeID, AwayClub.MatchClubTypeID) AS HomeOrAway,
     IIF(HomeClub.ClubID = @ClubID, HomeClub.Formation, AwayClub.Formation) AS Formation,
     IIF(HomeClub.ClubID = @ClubID, AwayClub.ClubID, HomeClub.ClubID) AS OpponentClub,
     IIF(HomeClub.ClubID = @ClubID, HomeClub.Score, AwayClub.Score) AS Score,

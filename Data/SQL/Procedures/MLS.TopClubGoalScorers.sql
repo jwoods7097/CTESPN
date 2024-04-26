@@ -14,8 +14,8 @@ BEGIN
             INNER JOIN MLS.ClubPlayer CP ON C.ClubID = CP.ClubID
             INNER JOIN MLS.Player P ON CP.PlayerID = P.PlayerID AND CP.PlayerTypeID = P.PlayerTypeID
             INNER JOIN MLS.MatchClubPlayer MCP ON MCP.PlayerID = CP.PlayerID AND MCP.PlayerTypeID = CP.PlayerTypeID AND MCP.ClubID = CP.ClubID
-            LEFT JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID
-            LEFT JOIN MLS.MatchGoalkeeperStats MGS ON MCP.MatchClubPlayerID = MGS.MatchClubPlayerID
+            LEFT JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID AND MCP.PlayerTypeID = MOS.PlayerTypeID
+            LEFT JOIN MLS.MatchGoalkeeperStats MGS ON MCP.MatchClubPlayerID = MGS.MatchClubPlayerID AND MCP.PlayerTypeID = MGS.PlayerTypeID
         GROUP BY P.PlayerID, C.ClubID, P.Name, C.Name, C.Abbreviation
     )
     SELECT PlayerID, ClubID, PlayerName, ClubName, Abbreviation, MatchesPlayed, CareerGoals

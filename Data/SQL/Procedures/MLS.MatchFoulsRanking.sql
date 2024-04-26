@@ -6,11 +6,11 @@ CREATE OR ALTER PROCEDURE MLS.MatchFoulsRanking
     @EndDate DATE
 AS
 BEGIN
-    WITH MatchClubPlayers AS (
+    WITH MatchClubPlayersCTE AS (
         SELECT M.MatchID, M.Date,
             (SELECT C.[Name] FROM MLS.Club C WHERE C.ClubID = Home.ClubID) AS HomeClubName, 
             (SELECT C.[Name] FROM MLS.Club C WHERE C.ClubID = Away.ClubID) AS AwayClubName, 
-            MCP.MatchClubPlayerID
+            MCP.MatchClubPlayerID, MCP.PlayerTypeID
         FROM MLS.Match M
         INNER JOIN MLS.MatchClub Home ON M.MatchID = Home.MatchID AND Home.MatchClubTypeID = (SELECT MatchClubTypeID FROM MLS.MatchClubType WHERE [Name] = N'Home')
         INNER JOIN MLS.MatchClub Away ON M.MatchID = Away.MatchID AND Away.MatchClubTypeID = (SELECT MatchClubTypeID FROM MLS.MatchCLubType WHERE [Name] = N'Away')
@@ -18,9 +18,9 @@ BEGIN
         WHERE M.Date BETWEEN @StartDate AND @EndDate
     )
     SELECT MCP.MatchID, MCP.Date, MCP.HomeClubName, MCP.AwayClubName, SUM(MOS.Fouls) + SUM(MGS.Fouls) AS Fouls
-    FROM MatchClubPlayers MCP
-    LEFT JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID
-    LEFT JOIN MLS.MatchGoalkeeperStats MGS ON MCP.MatchClubPlayerID = MGS.MatchClubPlayerID
+    FROM MatchClubPlayersCTE MCP
+    LEFT JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID AND MCP.PlayerTypeID = MOS.PlayerTypeID
+    LEFT JOIN MLS.MatchGoalkeeperStats MGS ON MCP.MatchClubPlayerID = MGS.MatchClubPlayerID AND MCP.PlayerTypeID = MGS.PlayerTypeID
     GROUP BY MCP.MatchID, MCP.Date, MCP.HomeClubName, MCP.AwayClubName
     ORDER BY Fouls DESC
 END

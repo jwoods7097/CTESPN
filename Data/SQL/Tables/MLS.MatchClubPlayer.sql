@@ -2,7 +2,7 @@ IF OBJECT_ID(N'MLS.MatchClubPlayer') IS NULL
 BEGIN  
     CREATE TABLE MLS.MatchClubPlayer
     (
-        MatchClubPlayerID INT NOT NULL IDENTITY(1, 1),
+        MatchClubPlayerID INT NOT NULL,
         PlayerID INT NOT NULL,
         PlayerTypeID INT NOT NULL,
         MatchID INT NOT NULL,
@@ -81,5 +81,21 @@ BEGIN
     REFERENCES MLS.MatchClubPlayer
     (
         MatchClubPlayerID
+    )
+END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.key_constraints kc
+        WHERE kc.parent_object_id = OBJECT_ID(N'MLS.MatchClubPlayer')
+            AND kc.[name] = N'UK_MLS_MatchClubPlayer_MatchClubPlayerIDPlayerTypeID'
+    )
+BEGIN
+    ALTER TABLE MLS.MatchClubPlayer
+    ADD CONSTRAINT [UK_MLS_MatchClubPlayer_MatchClubPlayerIDPlayerTypeID] UNIQUE NONCLUSTERED
+    (
+        MatchClubPlayerID,
+        PlayerTypeID
     )
 END;

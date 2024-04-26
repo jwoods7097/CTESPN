@@ -3,6 +3,7 @@ BEGIN
     CREATE TABLE MLS.MatchOutfielderStats
     (
         MatchClubPlayerID INT NOT NULL,
+        PlayerTypeID INT NOT NULL,
         Goals INT NOT NULL,
         Assists INT NOT NULL,
         Fouls INT NOT NULL,
@@ -31,10 +32,24 @@ BEGIN
     ALTER TABLE MLS.MatchOutfielderStats
     ADD CONSTRAINT [FK_MLS_MatchOutfielderStats_MLS_MatchClubPlayer] FOREIGN KEY
     (
-        MatchClubPlayerID
+        MatchClubPlayerID,
+        PlayerTypeID
     )
     REFERENCES MLS.MatchClubPlayer
     (
-        MatchClubPlayerID
+        MatchClubPlayerID,
+        PlayerTypeID
     )
+END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.check_constraints cc
+        WHERE cc.parent_object_id = OBJECT_ID(N'MLS.MatchOutfielderStats')
+            AND cc.[name] = N'CC_MLS_MatchOutfielderStats_PlayerTypeID'
+    )
+BEGIN
+    ALTER TABLE MLS.MatchOutfielderStats
+    ADD CONSTRAINT [CC_MLS_MatchOutfielderStats_PlayerTypeID] CHECK (PlayerTypeID IN (1, 3))
 END;
