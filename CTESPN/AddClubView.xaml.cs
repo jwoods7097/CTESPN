@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,18 @@ namespace CTESPN
         public AddClubView()
         {
             InitializeComponent();
+        }
+
+        private void AddClubButton_Click(object sender, RoutedEventArgs e)
+        {
+            string name = NameTextBox.Text;
+            string abbreviation = AbbreviationTextBox.Text;
+            string location = LocationTextBox.Text;
+            string conference = (bool)EasternButton.IsChecked ? "Eastern" : "Western";
+
+            SqlClubRepository repo = new SqlClubRepository();
+
+            repo.CreateClub(name, abbreviation, location, conference);
         }
     }
 }

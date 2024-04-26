@@ -7,12 +7,12 @@ namespace Data.Models
         public int Score { get; }
         public int OpponentScore { get; }
         public MatchClubType HomeOrAway { get; }
-        public int OpponentClub { get; }
+        public string OpponentClub { get; }
         public string Location { get; }
         public DateOnly Date { get; }
         public int Attendance { get; }
 
-        public MatchesForClub(int matchID, string location, DateOnly date, int attendance, MatchClubType homeoraway, string formation, int opponentclub, int score, int opponentscore) 
+        public MatchesForClub(int matchID, string location, DateOnly date, int attendance, MatchClubType homeoraway, string formation, string opponentclub, int score, int opponentscore) 
         {
             MatchID = matchID;
             Location = location;
