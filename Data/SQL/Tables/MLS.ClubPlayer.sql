@@ -74,3 +74,15 @@ BEGIN
         ClubID
     )
 END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.check_constraints cc
+        WHERE cc.parent_column_id = OBJECT_ID(N'MLS.ClubPlayer')
+            AND cc.[name] = N'CK_MLS_ClubPlayer_Date'
+    )
+BEGIN
+    ALTER TABLE MLS.ClubPlayer
+    ADD CONSTRAINT [CK_MLS_ClubPlayer_Date] CHECK (DateEnded > DateStarted)
+END;

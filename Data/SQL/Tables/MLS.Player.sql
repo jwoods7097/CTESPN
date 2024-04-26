@@ -33,3 +33,15 @@ BEGIN
         PlayerTypeID
     )
 END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.check_constraints cc
+        WHERE cc.parent_column_id = OBJECT_ID(N'MLS.Player')
+            AND cc.[name] = N'CK_MLS_Player_Name'
+    )
+BEGIN
+    ALTER TABLE MLS.Player
+    ADD CONSTRAINT [CK_MLS_Player_Name] CHECK ([Name] <> N'')
+END;

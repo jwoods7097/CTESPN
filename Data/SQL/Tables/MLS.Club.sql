@@ -44,3 +44,51 @@ BEGIN
         Abbreviation
     )
 END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.check_constraints cc
+        WHERE cc.parent_column_id = OBJECT_ID(N'MLS.Club')
+            AND cc.[name] = N'CK_MLS_Club_Name'
+    )
+BEGIN
+    ALTER TABLE MLS.Club
+    ADD CONSTRAINT [CK_MLS_Club_Name] CHECK ([Name] <> N'')
+END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.check_constraints cc
+        WHERE cc.parent_column_id = OBJECT_ID(N'MLS.Club')
+            AND cc.[name] = N'CK_MLS_Club_Abbreviation'
+    )
+BEGIN
+    ALTER TABLE MLS.Club
+    ADD CONSTRAINT [CK_MLS_Club_Abbreviation] CHECK (Abbreviation <> N'')
+END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.check_constraints cc
+        WHERE cc.parent_column_id = OBJECT_ID(N'MLS.Club')
+            AND cc.[name] = N'CK_MLS_Club_HomeLocation'
+    )
+BEGIN
+    ALTER TABLE MLS.Club
+    ADD CONSTRAINT [CK_MLS_Club_HomeLocation] CHECK (HomeLocation <> N'')
+END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.check_constraints cc
+        WHERE cc.parent_column_id = OBJECT_ID(N'MLS.Club')
+            AND cc.[name] = N'CK_MLS_Club_Conference'
+    )
+BEGIN
+    ALTER TABLE MLS.Club
+    ADD CONSTRAINT [CK_MLS_Club_Conference] CHECK (Conference <> N'')
+END;

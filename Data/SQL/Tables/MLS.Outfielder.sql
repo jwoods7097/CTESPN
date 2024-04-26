@@ -35,3 +35,15 @@ BEGIN
         PlayerTypeID
     )
 END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.check_constraints cc
+        WHERE cc.parent_column_id = OBJECT_ID(N'MLS.Outfielder')
+            AND cc.[name] = N'CK_MLS_Outfielder_Position'
+    )
+BEGIN
+    ALTER TABLE MLS.Outfielder
+    ADD CONSTRAINT [CK_MLS_Outfielder_Position] CHECK (Position <> N'')
+END;

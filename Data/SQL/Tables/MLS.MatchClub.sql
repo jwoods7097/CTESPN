@@ -107,3 +107,15 @@ BEGIN
         MatchID
     )
 END;
+
+IF NOT EXISTS
+    (
+        SELECT *
+        FROM sys.check_constraints cc
+        WHERE cc.parent_column_id = OBJECT_ID(N'MLS.MatchClub')
+            AND cc.[name] = N'CK_MLS_MatchClub_Formation'
+    )
+BEGIN
+    ALTER TABLE MLS.MatchClub
+    ADD CONSTRAINT [CK_MLS_MatchClub_Formation] CHECK (Formation <> N'')
+END;

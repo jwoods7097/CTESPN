@@ -73,31 +73,29 @@ club_mapping = {
 # result_df.to_csv('../Data/SQL/CSV/InfoForMatchClubTable.csv', index=True)
 
 
-# players = pd.read_csv('../Data/SQL/CSV/InfoForPlayerTable.csv', header=None)
-#
-# players = players.rename(columns={0: 'PlayerID', 1: 'PlayerTypeID', 2: 'Name'})
-#
-# players.drop('Name', axis=1, inplace=True)
-#
-# mcp = pd.read_excel('../RawData/match_club_players_all.xlsx', usecols=['PlayerID', 'Club'])
-#
-# merged = pd.merge(players, mcp, on='PlayerID')
-#
-# merged['DateStarted'] = '2021-01-01'
-#
-# merged = merged[merged['Club'].isin(club_mapping.keys())]
-#
-# merged = merged.drop_duplicates()
-#
-# merged = merged[merged.apply(lambda row: row.name in club_mapping.keys(), axis=1)]
-#
-# merged['ClubID'] = merged['Club'].map(club_mapping).astype(int)
-# merged.drop('Club', axis=1, inplace=True)
-#
-# column_order = ['PlayerID', 'PlayerTypeID', 'ClubID', 'DateStarted']
-# merged = merged[column_order]
-#
-# merged.to_csv('../Data/SQL/CSV/InfoForClubPlayerTable.csv', index=True)
+players = pd.read_csv('../Data/SQL/CSV/InfoForPlayerTable.csv', header=None)
+
+players = players.rename(columns={0: 'PlayerID', 1: 'PlayerTypeID', 2: 'Name'})
+
+players.drop('Name', axis=1, inplace=True)
+
+mcp = pd.read_excel('../RawData/match_club_players_all.xlsx', usecols=['PlayerID', 'Club'])
+
+merged = pd.merge(players, mcp, on='PlayerID')
+
+merged['DateStarted'] = '2021-01-01'
+
+merged = merged[merged['Club'].isin(club_mapping.keys())]
+
+merged = merged.drop_duplicates()
+
+merged['ClubID'] = merged['Club'].map(club_mapping).astype(int)
+merged.drop('Club', axis=1, inplace=True)
+
+column_order = ['PlayerID', 'PlayerTypeID', 'ClubID', 'DateStarted']
+merged = merged[column_order]
+
+merged.to_csv('../Data/SQL/CSV/InfoForClubPlayerTable.csv', index=True)
 
 
 # df = pd.read_excel('../RawData/match_club_players_all.xlsx')

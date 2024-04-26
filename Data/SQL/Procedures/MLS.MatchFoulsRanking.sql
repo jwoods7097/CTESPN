@@ -1,16 +1,29 @@
+--This procedure returns the number of fouls for each match in a given date range
+--This shows how "heated" a match is
+--We are using the entire date range for which we have data
 CREATE OR ALTER PROCEDURE MLS.MatchFoulsRanking
     @StartDate DATE,
     @EndDate DATE
 AS
-SELECT M.MatchID, M.Date, HomeClub.Name AS HomeClubName, AwayClub.Name AS AwayClubName, SUM(O.Fouls) AS Fouls
-FROM 
-    MLS.MatchOutfielderStats O 
-    INNER JOIN MLS.MatchClubPlayer MCP ON MCP.MatchClubPlayerID = O.MatchClubPlayerID
-    INNER JOIN MLS.MatchClub MC ON MCP.MatchID = MC.MatchID AND MCP.ClubID = MC.ClubID
-    INNER JOIN MLS.Club HomeClub ON HomeClub.ClubID = MC.ClubID AND MC.MatchClubTypeID = (SELECT MatchClubTypeID FROM MLS.MatchClubType WHERE [Name] = N'Home')
-    INNER JOIN MLS.Club AwayClub ON AwayClub.ClubID = MC.ClubID AND MC.MatchClubTypeID = (SELECT MatchClubTypeID FROM MLS.MatchClubType WHERE [Name] = N'Away')
-    INNER JOIN MLS.Match M ON M.MatchID = MC.MatchID
-WHERE M.Date BETWEEN @StartDate AND @EndDate
-GROUP BY M.MatchID, M.Date, HomeClub.Name, AwayClub.Name
-ORDER BY Fouls DESC
+BEGIN
+    WITH MatchClubPlayers AS (
+        SELECT M.MatchID, M.Date,
+            (SELECT C.[Name] FROM MLS.Club C WHERE C.ClubID = Home.ClubID) AS HomeClubName, 
+            (SELECT C.[Name] FROM MLS.Club C WHERE C.ClubID = Away.ClubID) AS AwayClubName, 
+            MCP.MatchClubPlayerID
+        FROM MLS.Match M
+        INNER JOIN MLS.MatchClub Home ON M.MatchID = Home.MatchID AND Home.MatchClubTypeID = (SELECT MatchClubTypeID FROM MLS.MatchClubType WHERE [Name] = N'Home')
+        INNER JOIN MLS.MatchClub Away ON M.MatchID = Away.MatchID AND Away.MatchClubTypeID = (SELECT MatchClubTypeID FROM MLS.MatchCLubType WHERE [Name] = N'Away')
+        INNER JOIN MLS.MatchClubPlayer MCP ON (Home.MatchID = MCP.MatchID AND Home.ClubID = MCP.ClubID) OR (Away.MatchID = MCP.MatchID AND Away.ClubID = MCP.ClubID)
+        WHERE M.Date BETWEEN @StartDate AND @EndDate
+    )
+    SELECT MCP.MatchID, MCP.Date, MCP.HomeClubName, MCP.AwayClubName, SUM(MOS.Fouls) + SUM(MGS.Fouls) AS Fouls
+    FROM MatchClubPlayers MCP
+    LEFT JOIN MLS.MatchOutfielderStats MOS ON MCP.MatchClubPlayerID = MOS.MatchClubPlayerID
+    LEFT JOIN MLS.MatchGoalkeeperStats MGS ON MCP.MatchClubPlayerID = MGS.MatchClubPlayerID
+    GROUP BY MCP.MatchID, MCP.Date, MCP.HomeClubName, MCP.AwayClubName
+    ORDER BY Fouls DESC
+END
 GO
+
+EXEC MLS.MatchFoulsRanking '2021-01-01', '2024-12-31'
