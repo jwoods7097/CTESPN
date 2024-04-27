@@ -61,6 +61,7 @@ Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\P
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.RetrieveYears.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.CreateClub.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.GetMatchesForClub.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.GetMatchesForClubWithOpponent.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Data\SQL\Procedures\MLS.GetMatchesForPlayer.sql"
 
 Write-Host "Inserting data..."

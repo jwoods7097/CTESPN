@@ -36,7 +36,8 @@ namespace Data
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedClub)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LogoPath)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrieveOpponents)));
-                //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrievePlayers)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Matches)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrievePlayers)));
             }
         }
 
@@ -52,7 +53,10 @@ namespace Data
             if (string.IsNullOrWhiteSpace(location)) throw new ArgumentException();
             if (string.IsNullOrWhiteSpace(conference)) throw new ArgumentException();
             var d = new CreateClubDataDelegate(name, abb, location, conference);
-            return executor.ExecuteNonQuery(d);
+            var result = executor.ExecuteNonQuery(d);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrieveClubs)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrieveOpponents)));
+            return result;
         }
 
         public List<string> RetrieveOpponents
@@ -68,17 +72,16 @@ namespace Data
             }
         }
 
-        public List<string> RetrieveClubPlayers
+        private string _selectedOpponent;
+
+        public string SelectedOpponent
         {
-            get
+            get => _selectedOpponent;
+            set
             {
-                var sqlResult = executor.ExecuteReader(new RetrieveClubPlayersDataDelegate(SelectedClub.ClubID));
-                List<string> result = new List<string>() { "Any" };
-                foreach (var player in sqlResult)
-                {
-                    result.Add(player.Name);
-                }
-                return result;
+                _selectedOpponent = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedOpponent)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Matches)));
             }
         }
 
@@ -96,6 +99,19 @@ namespace Data
             }
         }
 
+        private string _selectedYear = "Any";
+
+        public string SelectedYear
+        {
+            get => _selectedYear;
+            set
+            {
+                _selectedYear = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedYear)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Matches)));
+            }
+        }
+
         private string _logoPath = "Assets/ClubLogos/0.gif";
 
         public string LogoPath
@@ -103,6 +119,32 @@ namespace Data
             get => _logoPath;
         }
 
+        public IReadOnlyList<MatchesForClub> Matches
+        {
+            get {
+                string startDate;
+                string endDate;
+                if(SelectedYear == "Any")
+                {
+                    startDate = "2021-01-01";
+                    endDate = "2024-12-31";
+                }
+                else
+                {
+                    startDate = $"{SelectedYear}-01-01";
+                    endDate = $"{SelectedYear}-12-31";
+                }
 
+                if(SelectedOpponent == "Any")
+                {
+                    return executor.ExecuteReader(new GetMatchesForClubDataDelegate(SelectedClub.ClubID, startDate, endDate));
+                }
+                else
+                {
+                    int opponentClubID = RetrieveClubs.FirstOrDefault(x => x.Name == SelectedOpponent).ClubID;
+                    return executor.ExecuteReader(new GetMatchesForClubWithOpponentDataDelegate(SelectedClub.ClubID, opponentClubID, startDate, endDate));
+                }
+            }
+        }
     }
 }
