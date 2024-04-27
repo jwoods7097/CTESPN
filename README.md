@@ -29,3 +29,9 @@
 		along with a .md file of links we used for webmining
 
 - RebuildDatabase.ps1 is a Powershell script that can be used to drop and rebuild all tables from scratch
+
+## How to Run
+
+1. Run the `RebuildDatabase.ps1` script to build the database
+2. Open the CTESPN solution in the CTESPN directory
+3. Run the CTESPN project in Visual Studio
