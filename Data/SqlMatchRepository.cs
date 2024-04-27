@@ -40,11 +40,9 @@ namespace Data
             return executor.ExecuteNonQuery(d);
         }
 
-        public IReadOnlyList<MatchWithClub> RetrieveMatchesWithClubs() {
+        public IReadOnlyList<MatchWithClub> RetrieveMatchesWithClubs()
+        {
             return executor.ExecuteReader(new RetrieveMatchesWithClubsDataDelegate());
-        }
-        public IReadOnlyList<MatchesForClub> GetMatchesForClub() {
-            return executor.ExecuteReader(new GetMatchesForClubDataDelegate());
         }
     }
 }

@@ -1,5 +1,7 @@
-CREATE OR ALTER PROCEDURE MLS.GetMatchesForClub
+-- Gets the matches a club played in against a particular opponent within the provided date range
+CREATE OR ALTER PROCEDURE MLS.GetMatchesForClubWithOpponent
     @ClubID INT,
+    @OpponentClubID INT,
     @StartDate DATE,
     @EndDate DATE
 AS
@@ -23,8 +25,8 @@ SELECT HomeClub.[Name] HomeClub, AwayClub.[Name] AwayClub, M.[Date], HomeClub.Sc
 FROM MLS.Match M
     INNER JOIN HomeClub ON HomeClub.MatchID = M.MatchID
     LEFT JOIN AwayClub ON AwayClub.MatchID = M.MatchID
-WHERE (HomeClub.ClubID = @ClubID OR AwayClub.ClubID = @ClubID) AND M.[Date] BETWEEN @StartDate AND @EndDate
+WHERE ((HomeClub.ClubID = @ClubID AND AwayClub.ClubID = @OpponentClubID) OR (HomeClub.ClubID = @OpponentClubID AND AwayClub.ClubID = @ClubID)) AND M.[Date] BETWEEN @StartDate AND @EndDate
 ORDER BY M.[Date] ASC
 GO
 
-EXEC MLS.GetMatchesForClub 1, '2021-01-01', '2024-12-31'
+EXEC MLS.GetMatchesForClubWithOpponent 26, 23, '2021-01-01', '2024-12-31'

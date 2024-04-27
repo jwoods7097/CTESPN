@@ -23,9 +23,8 @@ namespace CTESPN
     {
         public PlayerView()
         {
-            InitializeComponent();
             this.DataContext = new SqlPlayerRepository();
-            VersusClubComboBox.SelectedIndex = 0;
+            InitializeComponent();
         }
     }
 }
