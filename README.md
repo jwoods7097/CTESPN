@@ -35,3 +35,5 @@
 1. Run the `RebuildDatabase.ps1` script to build the database
 2. Open the CTESPN solution in the CTESPN directory
 3. Run the CTESPN project in Visual Studio
+
+Note to Grader: As of 11:52pm on 4/26/24, there are several elements in the GUI present that we were unable to connect to the database due to issues with the data we collected. What you see is all we were able to get working before the due date.
