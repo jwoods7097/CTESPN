@@ -14,13 +14,11 @@
 	- Data/SQL/Schemas: Create schema script for MLS
 	- Data/SQL/Procedures: All stored procedures
 	- Data/SQL/Data: All scripts to populate with initial data. Data for python script are in Data/SQL/CSV
-	- Data/SQL/Procedures: The raw CSV files used to source data for populating the tables
+	- Data/SQL/CSV: The raw CSV files used to source data for populating the tables
 	- Data/SQL/FMT: The scripts used for importing CSV information using BCP
 	- All other non-SQL code is in Data (backend) and CTESPN (UI)
 
 - DataAccess: Contains readers, delegates, and exceptions used in the process of reading data from the SQL tables into the application
-
-- DataAccessTests: Contains tests for ensuring the functionality of the code in DataAccess
 
 - RawData: Excel spreadsheets containing information pulled from the Webmining scripts
 
