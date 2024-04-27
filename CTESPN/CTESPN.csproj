@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\ab.png" />
     <None Remove="Assets\ClubLogos\1.gif" />
     <None Remove="Assets\ClubLogos\10.gif" />
     <None Remove="Assets\ClubLogos\11.gif" />

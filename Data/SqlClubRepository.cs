@@ -36,6 +36,7 @@ namespace Data
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedClub)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LogoPath)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrieveOpponents)));
+                //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrievePlayers)));
             }
         }
 
@@ -62,6 +63,20 @@ namespace Data
                 List<string> result = new List<string>() { "Any" };
                 foreach(var club in sqlResult) {
                     result.Add(club.Name);
+                }
+                return result;
+            }
+        }
+
+        public List<string> RetrieveClubPlayers
+        {
+            get
+            {
+                var sqlResult = executor.ExecuteReader(new RetrieveClubPlayersDataDelegate(SelectedClub.ClubID));
+                List<string> result = new List<string>() { "Any" };
+                foreach (var player in sqlResult)
+                {
+                    result.Add(player.Name);
                 }
                 return result;
             }
