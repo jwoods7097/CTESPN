@@ -2,28 +2,26 @@
 using DataAccess;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Data.DataDelegates
 {
-    internal class RetrieveOpponentClubsDataDelegate : DataReaderDelegate<IReadOnlyList<Club>>
+    public class RetrieveOpponentClubsWithPlayerIDDataDelegate : DataReaderDelegate<IReadOnlyList<Club>>
     {
-        public readonly int clubID;
+        public readonly int playerID;
 
-        public RetrieveOpponentClubsDataDelegate(int ClubID) : base("MLS.RetrieveOpponentClubsWithClubID")
+        public RetrieveOpponentClubsWithPlayerIDDataDelegate(int playerID) : base("MLS.RetrieveOpponentClubsWithPlayerID")
         {
-            this.clubID = ClubID;
+            this.playerID = playerID;
         }
 
         public override void PrepareCommand(Command command)
         {
             base.PrepareCommand(command);
 
-            command.Parameters.AddWithValue("ClubID", clubID);
+            command.Parameters.AddWithValue("PlayerID", playerID);
         }
 
         public override IReadOnlyList<Club> Translate(Command command, IDataRowReader reader)

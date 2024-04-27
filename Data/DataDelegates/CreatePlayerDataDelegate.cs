@@ -9,9 +9,11 @@ namespace Data.DataDelegates
         public readonly PlayerType pt;
         public readonly string name;
         public readonly string position;
+        public readonly int playerid;
 
-        public CreatePlayerDataDelegate(PlayerType pt, string name, string position) : base("MLS.CreatePlayer")
+        public CreatePlayerDataDelegate(int playerid, PlayerType pt, string name, string position) : base("MLS.CreatePlayer")
         {
+            this.playerid = playerid;
             this.pt = pt;
             this.name = name;
             this.position = position;
@@ -21,17 +23,15 @@ namespace Data.DataDelegates
         {
             base.PrepareCommand(command);
 
+            command.Parameters.AddWithValue("PlayerID", playerid);
             command.Parameters.AddWithValue("PlayerTypeID", pt);
             command.Parameters.AddWithValue("Name", name);
             command.Parameters.AddWithValue("Position", position);
-
-            var p = command.Parameters.Add("PlayerID", SqlDbType.Int);
-            p.Direction = ParameterDirection.Output;
         }
 
         public override Player Translate(Command command)
         {
-            return new Player(command.GetParameterValue<int>("PlayerID"), pt, name, position);
+            return new Player(playerid, pt, name, position);
         }
     }
 }

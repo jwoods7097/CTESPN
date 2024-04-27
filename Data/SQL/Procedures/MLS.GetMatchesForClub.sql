@@ -14,7 +14,7 @@ AwayClub(ClubID, [Name], Score, MatchID) AS (
     FROM MLS.MatchClub AMC
         INNER JOIN MLS.Club AC ON AC.ClubID = AMC.ClubID AND AMC.MatchClubTypeID = 2
 )
-SELECT HomeClub.[Name] HomeClub, AwayClub.[Name] AwayClub, M.[Date], HomeClub.Score, AwayClub.Score OpponentScore,
+SELECT HomeClub.Name HomeClub, AwayClub.Name AwayClub, M.Date, HomeClub.Score, AwayClub.Score,
     CASE 
         WHEN HomeClub.Score > AwayClub.Score THEN 'Win'
         WHEN HomeClub.Score = AwayClub.Score THEN 'Draw'
@@ -24,7 +24,6 @@ FROM MLS.Match M
     INNER JOIN HomeClub ON HomeClub.MatchID = M.MatchID
     LEFT JOIN AwayClub ON AwayClub.MatchID = M.MatchID
 WHERE (HomeClub.ClubID = @ClubID OR AwayClub.ClubID = @ClubID) AND M.[Date] BETWEEN @StartDate AND @EndDate
-ORDER BY M.[Date] ASC
 GO
 
 EXEC MLS.GetMatchesForClub 1, '2021-01-01', '2024-12-31'

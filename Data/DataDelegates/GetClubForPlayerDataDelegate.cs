@@ -1,35 +1,33 @@
-﻿using Data.Models;
-using DataAccess;
+﻿using DataAccess;
+using Data.Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Data.DataDelegates
 {
-    internal class RetrieveOpponentClubsDataDelegate : DataReaderDelegate<IReadOnlyList<Club>>
+    public class GetClubForPlayerDataDelegate : DataReaderDelegate<IReadOnlyList<Club>>
     {
-        public readonly int clubID;
+        public readonly int playerid;
 
-        public RetrieveOpponentClubsDataDelegate(int ClubID) : base("MLS.RetrieveOpponentClubsWithClubID")
+        public GetClubForPlayerDataDelegate(int playerid) : base("MLS.GetClubForPlayer")
         {
-            this.clubID = ClubID;
+            this.playerid = playerid;
         }
 
         public override void PrepareCommand(Command command)
         {
             base.PrepareCommand(command);
 
-            command.Parameters.AddWithValue("ClubID", clubID);
+            command.Parameters.AddWithValue("PlayerID", playerid);
         }
 
         public override IReadOnlyList<Club> Translate(Command command, IDataRowReader reader)
         {
             var p = new List<Club>();
-
+            
             while (reader.Read())
             {
                 p.Add(new Club(reader.GetInt32("ClubID"), reader.GetString("Name"), reader.GetString("Abbreviation"), reader.GetString("HomeLocation"), reader.GetString("Conference")));

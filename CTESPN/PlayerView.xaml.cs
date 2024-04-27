@@ -21,12 +21,11 @@ namespace CTESPN
     /// </summary>
     public partial class PlayerView : UserControl
     {
-        private const string connectionString = @"Server=(localdb)\MSSQLLocalDb;Database=CTESPN;Integrated Security=SSPI;";
-
         public PlayerView()
         {
             InitializeComponent();
-            this.DataContext = new SqlPlayerRepository(connectionString);
+            this.DataContext = new SqlPlayerRepository();
+            VersusClubComboBox.SelectedIndex = 0;
         }
     }
 }

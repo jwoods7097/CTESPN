@@ -24,7 +24,9 @@ namespace CTESPN
         public ClubView()
         {
             this.DataContext = new SqlClubRepository();
+            
             InitializeComponent();
         }
+
     }
 }

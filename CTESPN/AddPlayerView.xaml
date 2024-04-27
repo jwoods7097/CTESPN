@@ -51,18 +51,22 @@
         <TextBlock Grid.Row="4" Grid.Column="1" TextAlignment="Right" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="4">
             Club:
         </TextBlock>
-        <ComboBox Name="ClubComboBox" Grid.Row="4" Grid.Column="2" Margin="8">
-            
+        <ComboBox Name="ClubComboBox" Grid.Row="4" Grid.Column="2" Margin="8" ItemsSource="{Binding Path=RetrieveClubs}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
 
         <TextBlock Grid.Row="5" Grid.Column="1" TextAlignment="Right" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="4">
             Position:
         </TextBlock>
-        <TextBox Name="PositionTextBox" Grid.Row="5" Grid.Column="2" Margin="8">
+        <ComboBox Name="PositionComboBox" Grid.Row="5" Grid.Column="2" Margin="8">
 
-        </TextBox>
+        </ComboBox>
 
-        <Button Name="AddClubButton" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" MaxWidth="200">
+        <Button Name="AddPlayerButton" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" MaxWidth="200" Click="AddPlayerButton_Click">
             <TextBlock FontSize="14">
                 Add Player
             </TextBlock>

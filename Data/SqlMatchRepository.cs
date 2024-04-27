@@ -43,9 +43,16 @@ namespace Data
         public IReadOnlyList<MatchWithClub> RetrieveMatchesWithClubs() {
             return executor.ExecuteReader(new RetrieveMatchesWithClubsDataDelegate());
         }
+<<<<<<< HEAD
+=======
+
+        public IReadOnlyList<MatchesForClub> GetMatchesForClub() {
+            return executor.ExecuteReader(new GetMatchesForClubDataDelegate());
+        }
 
         public IReadOnlyList<MatchesForPlayer> GetMatchesForPLayer() {
             return executor.ExecuteReader(new GetMatchesForPlayerDataDelegate());
         }
+>>>>>>> 70b43281a7a2f6a7eb379ebd83bb363eb31d76cc
     }
 }

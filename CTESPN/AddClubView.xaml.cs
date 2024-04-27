@@ -37,6 +37,15 @@ namespace CTESPN
             SqlClubRepository repo = new SqlClubRepository();
 
             repo.CreateClub(name, abbreviation, location, conference);
+
+            MessageBoxResult result = MessageBox.Show("Successfully added club", "Success", MessageBoxButton.OK);
+            if (result == MessageBoxResult.OK)
+            {
+                NameTextBox.Clear();
+                AbbreviationTextBox.Clear();
+                LocationTextBox.Clear();
+                EasternButton.IsChecked = true;
+            }
         }
     }
 }

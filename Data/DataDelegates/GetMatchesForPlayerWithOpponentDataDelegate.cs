@@ -1,19 +1,23 @@
+﻿using DataAccess;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Data.Models;
-using DataAccess;
-using NuGet.Frameworks;
-using System.Data;
 
 namespace Data.DataDelegates
 {
-    internal class GetMatchesForPlayerDataDelegate : DataReaderDelegate<IReadOnlyList<MatchesForPlayer>>
+    internal class GetMatchesForPlayerWithOpponentDataDelegate : DataReaderDelegate<IReadOnlyList<MatchesForPlayer>>
     {
         public readonly int playerID;
+        public readonly int opponentClubID;
         public readonly string startDate;
         public readonly string endDate;
-
-        public GetMatchesForPlayerDataDelegate(int playerID, string startDate, string endDate) : base("MLS.GetMatchesForPlayer")
+        public GetMatchesForPlayerWithOpponentDataDelegate(int playerID, int opponentClubID, string startDate, string endDate) : base("MLS.GetMatchesForPlayerWithOpponent")
         {
             this.playerID = playerID;
+            this.opponentClubID = opponentClubID;
             this.startDate = startDate;
             this.endDate = endDate;
         }
@@ -23,6 +27,7 @@ namespace Data.DataDelegates
             base.PrepareCommand(command);
 
             command.Parameters.AddWithValue("PlayerID", playerID);
+            command.Parameters.AddWithValue("OpponentClubID", opponentClubID);
             command.Parameters.AddWithValue("StartDate", startDate);
             command.Parameters.AddWithValue("EndDate", endDate);
         }
