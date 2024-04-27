@@ -6,26 +6,8 @@ namespace Data.DataDelegates
 {
     internal class GetMatchesForClubDataDelegate : DataReaderDelegate<IReadOnlyList<MatchesForClub>>
     {
-        public readonly int clubID;
-
-        public readonly string startDate;
-
-        public readonly string endDate;
-
-        public GetMatchesForClubDataDelegate(int ClubID, string StartDate, string EndDate) : base("MLS.GetMatchesForClub")
+        public GetMatchesForClubDataDelegate() : base("MLS.GetMatchesForClub")
         {
-            this.clubID = ClubID;
-            this.startDate = StartDate;
-            this.endDate = EndDate;
-        }
-
-        public override void PrepareCommand(Command command)
-        {
-            base.PrepareCommand(command);
-
-            command.Parameters.AddWithValue("ClubID", clubID);
-            command.Parameters.AddWithValue("StartDate", startDate);
-            command.Parameters.AddWithValue("EndDate", endDate);
         }
 
         public override IReadOnlyList<MatchesForClub> Translate(Command command, IDataRowReader reader)
@@ -34,7 +16,7 @@ namespace Data.DataDelegates
 
             while (reader.Read())
             {
-                p.Add(new MatchesForClub(reader.GetString("HomeClub"), reader.GetString("AwayClub"), reader.GetValue<DateTime>("Date"), reader.GetInt32("Score"), reader.GetInt32("OpponentScore"), reader.GetString("MatchOutcome")));
+                p.Add(new MatchesForClub(reader.GetInt32("MatchID"), reader.GetString("Location"), reader.GetValue<DateOnly>("Date"), reader.GetInt32("Attendance"), reader.GetValue<MatchClubType>("HomeOrAway"), reader.GetString("Formation"), reader.GetString("OpponentClub"), reader.GetInt32("Score"), reader.GetInt32("OpponentScore")));
             }
 
             return p;
