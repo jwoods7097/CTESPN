@@ -44,10 +44,6 @@ namespace Data
             return executor.ExecuteReader(new RetrieveMatchesWithClubsDataDelegate());
         }
 
-        public IReadOnlyList<MatchesForClub> GetMatchesForClub() {
-            return executor.ExecuteReader(new GetMatchesForClubDataDelegate());
-        }
-
         public IReadOnlyList<MatchesForPlayer> GetMatchesForPLayer() {
             return executor.ExecuteReader(new GetMatchesForPlayerDataDelegate());
         }

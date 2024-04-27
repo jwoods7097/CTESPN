@@ -2,27 +2,26 @@ namespace Data.Models
 {
     public class MatchesForClub
     {
-        public int MatchID { get; }
-        public string Formation { get; }
-        public int Score { get; }
-        public int OpponentScore { get; }
-        public MatchClubType HomeOrAway { get; }
-        public string OpponentClub { get; }
-        public string Location { get; }
-        public DateOnly Date { get; }
-        public int Attendance { get; }
+        public string HomeClub { get; }
 
-        public MatchesForClub(int matchID, string location, DateOnly date, int attendance, MatchClubType homeoraway, string formation, string opponentclub, int score, int opponentscore) 
+        public string AwayClub { get; }
+
+        public DateTime Date { get; }
+
+        public int Score { get; }
+
+        public int OpponentScore { get; }
+
+        public string MatchOutcome { get; }
+
+        public MatchesForClub(string homeClub, string awayClub, DateTime date, int score, int opponentScore, string matchOutcome)
         {
-            MatchID = matchID;
-            Location = location;
+            HomeClub = homeClub;
+            AwayClub = awayClub;
             Date = date;
-            Attendance = attendance;
-            OpponentClub = opponentclub;
-            Formation = formation;
             Score = score;
-            OpponentScore = opponentscore;
-            HomeOrAway = homeoraway;
+            OpponentScore = opponentScore;
+            MatchOutcome = matchOutcome;
         }
     }
 }
