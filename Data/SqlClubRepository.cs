@@ -38,6 +38,7 @@ namespace Data
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LogoPath)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrieveOpponents)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Matches)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrieveClubPlayers)));
             }
         }
 
@@ -56,6 +57,7 @@ namespace Data
             var result = executor.ExecuteNonQuery(d);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrieveClubs)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrieveOpponents)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrieveClubPlayers)));
             return result;
         }
 
@@ -109,6 +111,7 @@ namespace Data
                 _selectedYear = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedYear)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Matches)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RetrieveClubPlayers)));
             }
         }
 
@@ -145,6 +148,14 @@ namespace Data
                     int opponentClubID = RetrieveClubs.FirstOrDefault(x => x.Name == SelectedOpponent).ClubID;
                     return executor.ExecuteReader(new GetMatchesForClubWithOpponentDataDelegate(SelectedClub.ClubID, opponentClubID, startDate, endDate));
                 }
+            }
+        }
+
+        public IReadOnlyList<ClubPlayerInfo> RetrieveClubPlayers
+        {
+            get
+            {
+                return executor.ExecuteReader(new GetClubPlayersDataDelegate(SelectedClub.ClubID));
             }
         }
     }
