@@ -16,7 +16,7 @@ AwayClub(ClubID, [Name], Score, MatchID) AS (
     FROM MLS.MatchClub AMC
         INNER JOIN MLS.Club AC ON AC.ClubID = AMC.ClubID AND AMC.MatchClubTypeID = 2
 )
-SELECT HomeClub.[Name] HomeClub, AwayClub.[Name] AwayClub, M.[Date], HomeClub.Score, AwayClub.Score OpponentScore,
+SELECT M.MatchID, HomeClub.[Name] HomeClub, AwayClub.[Name] AwayClub, M.[Date], HomeClub.Score, AwayClub.Score OpponentScore,
     CASE 
         WHEN HomeClub.Score > AwayClub.Score THEN 'Win'
         WHEN HomeClub.Score = AwayClub.Score THEN 'Draw'

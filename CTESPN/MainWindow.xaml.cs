@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Data.Models;
 
 namespace CTESPN
 {
@@ -40,20 +41,26 @@ namespace CTESPN
         /// </summary>
         private AddClubView addClubView;
 
+        private MatchView matchView;
+
         /// <summary>
         /// The view that allows you to add players
         /// </summary>
         private AddPlayerView addPlayerView;
+
+        private Stack<UserControl> history;
         
         public MainWindow()
         {
             InitializeComponent();
+            history = new Stack<UserControl>();
             mainView = new MainView();
             ViewBox.Child = mainView;
             clubView = new ClubView();
             playerView = new PlayerView();
             addClubView = new AddClubView();
             addPlayerView = new AddPlayerView();
+            matchView = new MatchView();
         }
 
         /// <summary>
@@ -67,22 +74,39 @@ namespace CTESPN
             {
                 switch (b.Name) {
                     case "ViewClubsButton":
+                        history.Push(ViewBox.Child as UserControl);
                         ViewBox.Child = clubView;
                         break;
                     case "ViewPlayersButton":
+                        history.Push(ViewBox.Child as UserControl);
                         ViewBox.Child = playerView;
                         break;
                     case "AddClubsButton":
+                        history.Push(ViewBox.Child as UserControl);
                         ViewBox.Child = addClubView;
                         break;
                     case "AddPlayersButton":
+                        history.Push(ViewBox.Child as UserControl);
                         ViewBox.Child = addPlayerView;
                         break;
                     case "BackButton":
-                        ViewBox.Child = mainView;
+                        ViewBox.Child = history.Pop();
                         break;
                 }
                 e.Handled = true;
+            }
+        }
+
+        private void DataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(e.OriginalSource is DataGrid dg)
+            {
+                if(dg.SelectedItem is MatchesForClub mfc)
+                {
+                    matchView.SetDataContext(mfc.GetMatchID());
+                    history.Push(ViewBox.Child as UserControl);
+                    ViewBox.Child = matchView;
+                }                
             }
         }
     }

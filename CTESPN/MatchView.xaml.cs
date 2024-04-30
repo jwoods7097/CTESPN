@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,36 @@ namespace CTESPN
     /// </summary>
     public partial class MatchView : UserControl
     {
+        private SqlMatchRepository repo;
+
         public MatchView()
         {
             InitializeComponent();
+        }
+
+        public void SetDataContext(int matchID)
+        {
+            this.DataContext = repo = new SqlMatchRepository(matchID);
+            repo.GetPlayersInMatch("Any");
+        }
+
+        public void HandleRadioButtonSelectionChange(object sender, RoutedEventArgs e)
+        {
+            if(repo != null) {
+                if (e.OriginalSource == AnyButton)
+                {
+                    repo.GetPlayersInMatch("Any");
+                }
+                else if (e.OriginalSource == HomeButton)
+                {
+                    repo.GetPlayersInMatch("Home");
+                }
+                else if (e.OriginalSource == AwayButton)
+                {
+                    repo.GetPlayersInMatch("Away");
+                }
+            }
+            e.Handled = true;
         }
     }
 }

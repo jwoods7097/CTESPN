@@ -99,6 +99,6 @@
         <ComboBox Name="ClubMatchSortByComboBox" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0">
 
         </ComboBox>
-        <DataGrid Name="ClubMatchDataGrid" ItemsSource="{Binding Path=Matches}" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="4" Margin="8"/>
+        <DataGrid Name="ClubMatchDataGrid" ItemsSource="{Binding Path=Matches}" SelectionMode="Single" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="4" Margin="8"/>
     </Grid>
 </UserControl>

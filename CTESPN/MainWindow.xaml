@@ -18,7 +18,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid Button.Click="HandleClick">
+    <Grid Button.Click="HandleClick" DataGrid.SelectionChanged="DataGridSelectionChanged">
         <Border Name="ViewBox"/>
     </Grid>
 </Window>

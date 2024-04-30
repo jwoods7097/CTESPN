@@ -8,16 +8,60 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Testing.Platform.Extensions.Messages;
+using System.ComponentModel;
 
 namespace Data
 {
-    public class SqlMatchRepository
+    public class SqlMatchRepository : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private const string connectionString = @"Server=(localdb)\MSSQLLocalDb;Database=CTESPN;Integrated Security=SSPI;";
+
         public readonly SqlCommandExecutor executor;
 
-        public SqlMatchRepository(string connectionString)
+        private int matchID;
+
+        public MatchResult CurrentMatch { get; }
+
+        public IReadOnlyList<MatchEvent> MatchEvents { get; }
+
+        private IReadOnlyList<PlayerInMatch> _players;
+        
+        public IReadOnlyList<PlayerInMatch> Players
         {
+            get => _players;
+            set
+            {
+                _players = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Players)));
+            }
+        }
+
+        public SqlMatchRepository(int matchID)
+        {
+            this.matchID = matchID;
             executor = new SqlCommandExecutor(connectionString);
+            CurrentMatch = executor.ExecuteReader(new GetMatchDataDelegate(matchID))[0];
+            MatchEvents = executor.ExecuteReader(new GetMatchEventsDataDelegate(matchID));
+        }
+
+        public void GetPlayersInMatch(string clubtype)
+        {
+            switch(clubtype)
+            {
+                case "Any":
+                    Players = executor.ExecuteReader(new GetAllPlayersInMatchDataDelegate(matchID));
+                    break;
+                case "Home":
+                    Players = executor.ExecuteReader(new GetPlayersInMatchFromClubDataDelegate(matchID, CurrentMatch.HomeClubID));
+                    break;
+                case "Away":
+                    Players = executor.ExecuteReader(new GetPlayersInMatchFromClubDataDelegate(matchID, CurrentMatch.AwayClubID));
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
         }
 
         public Match CreateMatch(string location, DateOnly date, int attendance)
