@@ -30,7 +30,7 @@ namespace Data.DataDelegates
 
             while (reader.Read())
             {
-                p.Add(new PlayerInMatch(reader.GetString("Name"), reader.GetString("Position"), reader.GetString("Club"), reader.GetString("SubstitutionTime"), reader.GetString("Substitute"), reader.GetString("Played")));
+                p.Add(new PlayerInMatch(reader.GetInt32("PlayerID"), reader.GetString("Name"), reader.GetString("Position"), reader.GetString("Club"), reader.GetString("SubstitutionTime"), reader.GetString("Substitute"), reader.GetString("Played")));
             }
 
             return p;

@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 
 namespace Data.DataDelegates
 {
-    public class GetClubForPlayerDataDelegate : DataReaderDelegate<IReadOnlyList<Club>>
+    public class GetPlayerMatchStatsDataDelegate : DataReaderDelegate<IReadOnlyList<PlayerStats>>
     {
         public readonly int playerid;
 
-        public GetClubForPlayerDataDelegate(int playerid) : base("MLS.GetClubForPlayer")
+        public readonly int matchid;
+
+        public GetPlayerMatchStatsDataDelegate(int playerid, int matchid) : base("MLS.GetPlayerMatchStats")
         {
             this.playerid = playerid;
+            this.matchid = matchid;
         }
 
         public override void PrepareCommand(Command command)
@@ -22,15 +25,16 @@ namespace Data.DataDelegates
             base.PrepareCommand(command);
 
             command.Parameters.AddWithValue("PlayerID", playerid);
+            command.Parameters.AddWithValue("MatchID", matchid);
         }
 
-        public override IReadOnlyList<Club> Translate(Command command, IDataRowReader reader)
+        public override IReadOnlyList<PlayerStats> Translate(Command command, IDataRowReader reader)
         {
-            var p = new List<Club>();
+            var p = new List<PlayerStats>();
             
             while (reader.Read())
             {
-                p.Add(new Club(reader.GetInt32("ClubID"), reader.GetString("Name"), reader.GetString("Abbreviation"), reader.GetString("HomeLocation"), reader.GetString("Conference")));
+                p.Add(new PlayerStats(reader.IsDbNull("Goals") ? null : reader.GetInt32("Goals"), reader.IsDbNull("Assists") ? null : reader.GetInt32("Assists"), reader.IsDbNull("Offsides") ? null : reader.GetInt32("Offsides"), reader.IsDbNull("Shots") ? null : reader.GetInt32("Shots"), reader.IsDbNull("ShotsOnTarget") ? null : reader.GetInt32("ShotsOnTarget"), reader.IsDbNull("Saves") ? null : reader.GetInt32("Saves"), reader.GetInt32("Fouls"), reader.GetInt32("YellowCards"), reader.GetInt32("RedCards")));
             }
 
             return p;

@@ -4,7 +4,7 @@ CREATE OR ALTER PROCEDURE MLS.GetPlayersInMatchFromClub
     @ClubID INT
 AS
 
-SELECT P.Name, PT.Name Position, C.Name Club, ISNULL(MCP.SubstitutionTime, '') SubstitutionTime,
+SELECT P.PlayerID, P.Name, PT.Name Position, C.Name Club, ISNULL(MCP.SubstitutionTime, '') SubstitutionTime,
     ISNULL((
         SELECT SP.Name
         FROM MLS.Player SP

@@ -106,7 +106,7 @@ namespace CTESPN
                     matchView.SetDataContext(mfc.GetMatchID());
                     history.Push(ViewBox.Child as UserControl);
                     ViewBox.Child = matchView;
-                }                
+                }
             }
         }
     }

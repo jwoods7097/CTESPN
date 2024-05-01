@@ -64,6 +64,11 @@ namespace Data
             }
         }
 
+        public IReadOnlyList<PlayerStats> GetPlayerStats(int playerID)
+        {
+            return executor.ExecuteReader(new GetPlayerMatchStatsDataDelegate(playerID, matchID));
+        }
+
         public Match CreateMatch(string location, DateOnly date, int attendance)
         {
             if (string.IsNullOrEmpty(location)) { throw new ArgumentException(); }

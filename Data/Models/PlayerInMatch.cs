@@ -8,6 +8,8 @@ namespace Data.Models
 {
     public class PlayerInMatch
     {
+        private int PlayerID;
+
         public string Name { get; }
 
         public string Position { get; }
@@ -20,14 +22,20 @@ namespace Data.Models
 
         public string Played { get; }
 
-        public PlayerInMatch(string name, string position, string club, string substitutionTime, string substitute, string played)
+        public PlayerInMatch(int playerID, string name, string position, string club, string substitutionTime, string substitute, string played)
         {
+            PlayerID = playerID;
             Name = name;
             Position = position;
             Club = club;
             SubstitutionTime = substitutionTime;
             Substitute = substitute;
             Played = played;
+        }
+
+        public int GetPlayerID()
+        {
+            return PlayerID;
         }
     }
 }

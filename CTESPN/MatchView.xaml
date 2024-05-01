@@ -109,6 +109,6 @@
                 Away
             </RadioButton>
         </StackPanel>
-        <DataGrid Name="MatchPlayerDataGrid" ItemsSource="{Binding Path=Players}" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="4" Margin="8"/>
+        <DataGrid Name="MatchPlayerDataGrid" ItemsSource="{Binding Path=Players}" SelectionMode="Single" SelectionChanged="HandlePlayerClick" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="4" Margin="8"/>
     </Grid>
 </UserControl>
