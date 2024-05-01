@@ -30,7 +30,7 @@ namespace Data.DataDelegates
 
             while (reader.Read())
             {
-                p.Add(new ClubPlayerInfo(reader.GetInt32("PlayerID"), reader.GetString("Name"), reader.GetValue<PlayerType>("PlayerTypeID"), reader.GetValue<DateTime>("DateStarted"), reader.IsDbNull("DateEnded") ? null : reader.GetValue<DateTime>("DateEnded")));
+                p.Add(new ClubPlayerInfo(reader.GetString("Name"), reader.GetValue<PlayerType>("PlayerTypeID"), reader.GetValue<DateTime>("FirstMatch"), reader.IsDbNull("LatestMatch") ? null : reader.GetValue<DateTime>("LatestMatch")));
             }
 
             return p;

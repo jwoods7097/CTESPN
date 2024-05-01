@@ -90,21 +90,15 @@
         <TextBlock Grid.Row="6" Grid.Column="0" TextAlignment="Left" VerticalAlignment="Bottom" FontSize="14" Margin="4">
             Commentary:
         </TextBlock>
-        <TextBlock Grid.Row="6" Grid.Column="1" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="14" Margin="4">
-            Sort By:
-        </TextBlock>
-        <ComboBox Name="CommentarySortByComboBox" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="8,8,8,0">
-
-        </ComboBox>
         <DataGrid Name="CommentaryDataGrid" ItemsSource="{Binding Path=MatchEvents}" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Margin="8"/>
 
         <TextBlock Grid.Row="6" Grid.Column="4" TextAlignment="Left" VerticalAlignment="Bottom" FontSize="14" Margin="4">
             Players:
         </TextBlock>
-        <TextBlock Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontSize="14" Margin="4">
+        <TextBlock Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontSize="14" Margin="4">
             Team
         </TextBlock>
-        <StackPanel RadioButton.Checked="HandleRadioButtonSelectionChange" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="8">
+        <StackPanel RadioButton.Checked="HandleRadioButtonSelectionChange" Grid.Row="6" Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="8">
             <RadioButton IsChecked="True" Name="AnyButton" VerticalAlignment="Center" GroupName="Team" FontSize="14" Margin="0,0,8,0">
                 Any
             </RadioButton>
@@ -115,12 +109,6 @@
                 Away
             </RadioButton>
         </StackPanel>
-        <TextBlock Grid.Row="6" Grid.Column="5" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="14" Margin="4">
-            Sort By:
-        </TextBlock>
-        <ComboBox Name="MatchPlayerSortByComboBox" Grid.Row="6" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0">
-
-        </ComboBox>
         <DataGrid Name="MatchPlayerDataGrid" ItemsSource="{Binding Path=Players}" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="4" Margin="8"/>
     </Grid>
 </UserControl>

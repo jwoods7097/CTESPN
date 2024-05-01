@@ -8,19 +8,17 @@ namespace Data.Models
 {
     public class ClubPlayerInfo
     {
-        public int PlayerID { get; }
         public string Name { get; }
         public PlayerType PlayerType { get; }
-        public DateTime DateStarted { get; }
-        public DateTime? DateEnded { get; }
+        public DateOnly FirstMatch { get; }
+        public DateOnly? LatestMatch { get; }
 
-        public ClubPlayerInfo(int playerID, string name, PlayerType pt, DateTime dateStarted, DateTime? dateEnded)
+        public ClubPlayerInfo(string name, PlayerType pt, DateTime firstMatch, DateTime? latestMatch)
         {
-            PlayerID = playerID;
             Name = name;
             PlayerType = pt;
-            DateStarted = dateStarted;
-            DateEnded = dateEnded;
+            FirstMatch = DateOnly.FromDateTime(firstMatch);
+            LatestMatch = latestMatch == null ? null : DateOnly.FromDateTime((DateTime)latestMatch);
         }
     }
 }

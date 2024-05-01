@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.DataDelegates
 {
-    internal class GetPreviousClubsDataDelegate : DataReaderDelegate<IReadOnlyList<Club>>
+    internal class GetPreviousClubsDataDelegate : DataReaderDelegate<IReadOnlyList<PreviousClub>>
     {
         public readonly int playerID;
         public readonly int clubID;
@@ -27,13 +27,13 @@ namespace Data.DataDelegates
             command.Parameters.AddWithValue("ClubID", clubID);
         }
 
-        public override IReadOnlyList<Club> Translate(Command command, IDataRowReader reader)
+        public override IReadOnlyList<PreviousClub> Translate(Command command, IDataRowReader reader)
         {
-            var p = new List<Club>();
+            var p = new List<PreviousClub>();
             
             while (reader.Read())
             {
-                p.Add(new Club(reader.GetInt32("ClubID"), reader.GetString("Name"), reader.GetString("Abbreviation"), reader.GetString("HomeLocation"), reader.GetString("Conference")));
+                p.Add(new PreviousClub(reader.GetString("Name"), reader.GetValue<DateTime>("FirstMatch"), reader.GetValue<DateTime>("LastMatch")));
             }
 
             return p;

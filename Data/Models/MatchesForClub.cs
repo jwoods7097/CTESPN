@@ -8,7 +8,7 @@ namespace Data.Models
 
         public string AwayClub { get; }
 
-        public DateTime Date { get; }
+        public DateOnly Date { get; }
 
         public int Score { get; }
 
@@ -21,7 +21,7 @@ namespace Data.Models
             MatchID = matchID;
             HomeClub = homeClub;
             AwayClub = awayClub;
-            Date = date;
+            Date = DateOnly.FromDateTime(date);
             Score = score;
             OpponentScore = opponentScore;
             MatchOutcome = matchOutcome;

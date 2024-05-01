@@ -76,27 +76,15 @@
         <TextBlock Grid.Row="5" Grid.Column="0" TextAlignment="Left" VerticalAlignment="Bottom" FontSize="14" Margin="4">
             Players:
         </TextBlock>
-        <TextBlock Grid.Row="5" Grid.Column="1" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="14" Margin="4">
-            Sort By:
-        </TextBlock>
-        <ComboBox Name="ClubPlayerSortByComboBox" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="8,8,8,0">
-
-        </ComboBox>
         <DataGrid Name="ClubPlayerDataGrid" ItemsSource="{Binding Path=RetrieveClubPlayers}" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Margin="8"/>
 
         <TextBlock Grid.Row="5" Grid.Column="4" TextAlignment="Left" VerticalAlignment="Bottom" FontSize="14" Margin="4">
             Matches:
         </TextBlock>
-        <TextBlock Grid.Row="4" Grid.Column="5" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="14" Margin="4">
+        <TextBlock Grid.Row="5" Grid.Column="5" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="14" Margin="4">
             Versus:
         </TextBlock>
-        <ComboBox Name="VersusClubComboBox" ItemsSource="{Binding Path=RetrieveOpponents}" SelectedItem="{Binding Path=SelectedOpponent}" SelectedIndex="0" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0"/>
-        <TextBlock Grid.Row="5" Grid.Column="5" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="14" Margin="4">
-            Sort By:
-        </TextBlock>
-        <ComboBox Name="ClubMatchSortByComboBox" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0">
-
-        </ComboBox>
+        <ComboBox Name="VersusClubComboBox" ItemsSource="{Binding Path=RetrieveOpponents}" SelectedItem="{Binding Path=SelectedOpponent}" SelectedIndex="0" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" Margin="8,8,8,0"/>
         <DataGrid Name="ClubMatchDataGrid" ItemsSource="{Binding Path=Matches}" SelectionMode="Single" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="4" Margin="8"/>
     </Grid>
 </UserControl>

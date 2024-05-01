@@ -8,7 +8,7 @@ using Data.Models;
 
 namespace Data.DataDelegates
 {
-    internal class GetMatchesForPlayerWithOpponentDataDelegate : DataReaderDelegate<IReadOnlyList<MatchesForPlayer>>
+    internal class GetMatchesForPlayerWithOpponentDataDelegate : DataReaderDelegate<IReadOnlyList<MatchesForClub>>
     {
         public readonly int playerID;
         public readonly int opponentClubID;
@@ -32,13 +32,13 @@ namespace Data.DataDelegates
             command.Parameters.AddWithValue("EndDate", endDate);
         }
 
-        public override IReadOnlyList<MatchesForPlayer> Translate(Command command, IDataRowReader reader)
+        public override IReadOnlyList<MatchesForClub> Translate(Command command, IDataRowReader reader)
         {
-            var p = new List<MatchesForPlayer>();
+            var p = new List<MatchesForClub>();
 
             while (reader.Read())
             {
-                p.Add(new MatchesForPlayer(reader.GetString("Name"), reader.GetInt32("ClubID"), reader.GetString("ClubName"), reader.GetString("OpponentClubName"), reader.GetValue<MatchClubType>("HomeOrAway"), reader.GetInt32("MatchID"), reader.GetValue<DateTime>("Date"), reader.GetString("Location"), reader.GetString("Formation"), reader.GetInt32("Score"), reader.GetInt32("OpponentScore"), reader.GetString("MatchOutcome"), reader.GetInt32("Attendance")));
+                p.Add(new MatchesForClub(reader.GetInt32("MatchID"), reader.GetString("HomeClub"), reader.GetString("AwayClub"), reader.GetValue<DateTime>("Date"), reader.GetInt32("Score"), reader.GetInt32("OpponentScore"), reader.GetString("MatchOutcome")));
             }
 
             return p;

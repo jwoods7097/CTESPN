@@ -7,3 +7,5 @@ FROM MLS.ClubPlayer CP
     INNER JOIN MLS.Club C ON C.ClubID = CP.ClubID
 WHERE CP.PlayerID = @PlayerID;
 GO
+
+EXEC MLS.GetClubForPlayer 364138

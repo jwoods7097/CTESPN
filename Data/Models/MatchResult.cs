@@ -20,7 +20,7 @@ namespace Data.Models
 
         public string Location { get; }
 
-        public DateTime Date { get; }
+        public DateOnly Date { get; }
 
         public int Attendance { get; }
 
@@ -35,7 +35,7 @@ namespace Data.Models
             AwayScore = awayScore;
             AwayFormation = awayFormation;
             Location = location;
-            Date = date;
+            Date = DateOnly.FromDateTime(date);
             Attendance = attendance;
         }
     }

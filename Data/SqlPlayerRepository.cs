@@ -127,7 +127,7 @@ namespace Data
         }
 
 
-        public IReadOnlyList<MatchesForPlayer>? Matches
+        public IReadOnlyList<MatchesForClub>? Matches
         {
             get
             {
@@ -161,7 +161,7 @@ namespace Data
             }
         }
 
-        public IReadOnlyList<Club> GetPreviousClubs
+        public IReadOnlyList<PreviousClub> GetPreviousClubs
         {
             get
             {
