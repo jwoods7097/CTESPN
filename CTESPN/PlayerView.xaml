@@ -86,7 +86,7 @@
         <ComboBox Name="PlayerClubSortByComboBox" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="8,8,8,0">
 
         </ComboBox>
-        <DataGrid Name="PlayerClubDataGrid" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Margin="8">
+        <DataGrid Name="PlayerClubDataGrid" ItemsSource="{Binding Path=GetPreviousClubs}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Margin="8">
 
         </DataGrid>
 

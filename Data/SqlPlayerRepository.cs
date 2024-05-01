@@ -44,6 +44,7 @@ namespace Data
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Matches)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PossibleOpponents)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedClub)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GetPreviousClubs)));
             }
         }
 
@@ -157,6 +158,14 @@ namespace Data
                     }
                     return null;
                 }
+            }
+        }
+
+        public IReadOnlyList<Club> GetPreviousClubs
+        {
+            get
+            {
+                return executor.ExecuteReader(new GetPreviousClubsDataDelegate(SelectedPlayer.PlayerID, SelectedClub.ClubID));
             }
         }
     }
